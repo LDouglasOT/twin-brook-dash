@@ -8,7 +8,7 @@ import Dropdown from 'react-dropdown';
 import {MdOutlineTextsms} from 'react-icons/md'
 import 'react-dropdown/style.css';
 
-function Table({visible,modulate}) {
+function Table({visible,modulate,modifies}) {
   const [table,setTable]=useState([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
   const [count,setCount]=useState(100)
   useEffect(()=> {
@@ -21,9 +21,9 @@ function Table({visible,modulate}) {
 
   const fetchdata=async()=>{
     const data=await axios.get("https://twinbrook.onrender.com/new/students")
-    console.log(data.data)
-    setTable(data.data.message)
-    setCount(data.data.message.length)
+    // console.log(data.data)
+    // setTable(data.data.message)
+    // setCount(data.data.message.length)
     totalCollected(data.data.message)
   }
 const totalCollected=(data)=>{
@@ -82,7 +82,7 @@ const defaultOption = 'Filter stream';
                   <td className='items-center justify-center w-10 text-sm'><div className='flex items-center justify-center'>{item.Payable}</div></td>
                   <td className='items-center justify-center w-10 text-sm border'><div className='flex items-center justify-center '>{item.Discount}</div></td>
                   <td className='items-center justify-center w-20 text-sm border'><div className='flex items-center justify-center text-sm'>
-                  <img src="https://img.icons8.com/material-rounded/18/000000/edit--v3.png" alt='' className='hover:cursor-pointer p-1 bg-green-500 rounded cursor-pointer'/>
+                  <img src="https://img.icons8.com/material-rounded/18/000000/edit--v3.png" alt='' className='hover:cursor-pointer p-1 bg-green-500 rounded cursor-pointer' onClick={()=>modifies()}/>
                   <MdOutlineTextsms className='w-6 h-6 mx-1 text-green-500 hover:cursor-pointer'/>
                     </div></td>
                 </tr>

@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import {Routing,Header,Topstat,Popup,Table,New,Uniform,NoPage,Messages} from './components';
+import {Routing,Header,Topstat,Popup,Table,New,Uniform,NoPage,Messages,Pop} from './components';
 import { useState } from 'react';
 import {MDBIcon} from "react-bootstrap-icons";
 import { BsPerson } from 'react-icons/bs';
@@ -15,6 +15,7 @@ import {
 
 function Authenticated() {
   const [visible,setVisible]=useState(false)
+  const [Modif,setModify]=useState(false)
   const [stat,setStat]=useState([
     {
       'Name':'Students',
@@ -42,6 +43,11 @@ function Authenticated() {
   const modulate=()=>{
     setVisible(!visible)
   }
+  const modify=()=>{
+    console.log('hello')
+    setModify(!Modif)
+  }
+
   return ( 
     <div className="flex bg-white-bg h-screen w-full">
       <div className='w-2/12 bg-slate-700 hover:overflow-auto fixed h-screen'>
@@ -79,11 +85,10 @@ function Authenticated() {
              </div>
            </div>
            <div className='h-full w-full bg-white p-0'>
-          {visible ? <Popup/>:""}
-         
-         
+          {visible ? <Popup modulate={modulate}/>:""}
+          {Modif ? <Pop modulate={modify}/> : ""}
       <Routes>
-        <Route path="/Students" element={ <Table/>}/>
+        <Route path="/Students" element={ <Table  modifies={modify}/>}/>
         <Route path="/Uniforms" element={ <Uniform/>}/>
         <Route path="/Messages" element={ <Messages/>}/>
         <Route path="/Dashboards" element={ <NoPage/>}/>
