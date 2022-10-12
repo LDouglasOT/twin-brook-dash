@@ -8,22 +8,16 @@ import {
 import Authenticated from './Authenticated'
 import {Login} from './components'
 import {useState} from 'react'
+import StateContextProvider from "./Context/StateContextProvider"
 
 function App() {
-const {token,setToken}=useState(false)
-if (token){
-  <Router>
-  <div>
-    <Login/>
-  </div>
-  </Router>
-}
-
   return (
     <Router>
+      <StateContextProvider>
     <div>
       <Authenticated/>
     </div>
+    </StateContextProvider>
     </Router>
   )
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { useContext } from 'react';
+import {StateContext} from '../../Context/StateContextProvider'
 
 function Popup({modulate}) {
   const options = [
@@ -10,7 +12,7 @@ function Popup({modulate}) {
     'Pegion', 'Duckling', 'SOmething','SOmething','P5','P6','P7'
   ];
   const defaultOption = options[0];
-
+  const {New,modify}= useContext(StateContext)
   return (
     <>
           <div
@@ -18,8 +20,8 @@ function Popup({modulate}) {
           >
             <div className="relative w-auto my-6 mx-auto ">
              
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-              <div className='w-full bg-slate-600'>New Student Registration</div>
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-800 outline-none focus:outline-none">
+              <div className='w-full  text-slate-500 my-2 flex justify-center'><span>New Student Registration</span></div>
             
 <form>
     <div class="grid gap-6 mb-6 mx-4 md:grid-cols-3">
@@ -74,6 +76,10 @@ function Popup({modulate}) {
             </div>
             <div>
             </div>
+      </div>
+      <div className='flex justify-end w-full ml-1'>
+      <button className='bg-red-600 text-white rounded-sm m-4 text-sm py-1 px-3 active:bg-red-800'>Close</button>
+      <button className='bg-green-600 text-white rounded-sm m-4 text-sm py-1 px-3 active:bg-green-800'>Submit</button>
       </div>
 
 </form>

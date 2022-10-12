@@ -13,19 +13,49 @@ function Table({visible,modulate}) {
   const [count,setCount]=useState(100)
   useEffect(()=> {
     fetchdata()
-    const interval=setInterval(()=>{
-      fetchdata()
-     },10000) 
-     return()=>clearInterval(interval)
+    // const interval=setInterval(()=>{
+    //   fetchdata()
+    //  },10000) 
+    //  return()=>clearInterval(interval)
 },[0]);
 
   const fetchdata=async()=>{
-    const data=await axios.get("https://twinbrook.onrender.com/new/students")
+    const data=await axios.get("http://127.0.0.1:8000/student/")
     console.log(data.data)
-    setTable(data.data.message)
-    setCount(data.data.message.length)
-    totalCollected(data.data.message)
+    setTable(data.data)
+    setCount(data.data.length)
+    totalCollected(data.data)
+    console.log(data.data)
+
+    // data.data.message.map((item)=>{
+    //   postdata(item)
+    // })
   }
+const postdata=async(item)=>{
+  const data=await axios.post("https://twinbrook.onrender.com/new/students",{
+    "FirstName":item.FirstName,
+    "SurName":item.SurName,
+    "MiddleName":item.MiddleName,
+    "Nationality":item.nationality,
+    "Mobilephone":item.mobile_phone,
+    "Stream":item.Stream,
+    "Discount":item.Discount,
+    "Dateofbirth":item.date_of_birth,
+    "Schoolpay":item.code,
+    "StudentID":item.StudentID,
+    "Payable":item.Payable,
+    "Bal":item.Bal,
+    "Paid":item.Paid,
+    "Class":item.Class,
+    "ExtraPay":item.ExtraPay,
+    "Paystatus":item.Paystatus,
+    "Studentstatus":item.Studentstatus,
+    "Total":item.Total,
+    "Gender":item.Gender,
+    "Email":item.Email
+  })
+console.log(data)
+}
 const totalCollected=(data)=>{
   var total=0 
   data.forEach((item)=>{
@@ -72,7 +102,7 @@ const defaultOption = 'Filter stream';
               <tbody>
               {table.map((item,key)=>(
                 <tr className='border flex-row h-5'>
-                  <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center p-2'>{(item.code==1) ? <button className='bg-slate-500 rounded p-1 text-slate-100'>update code</button> : <div> {item.code ? item.code : <button className='bg-slate-500 rounded p-1 text-slate-100'>update code</button>}</div>}</div></td>
+                  <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center p-2'>{(item.Schoolpay==1) ? <button className='bg-slate-500 rounded p-1 text-slate-100'>update code</button> : <div> {item.Schoolpay ? item.Schoolpay : <button className='bg-slate-500 rounded p-1 text-slate-100'>update code</button>}</div>}</div></td>
                   <td className='items-center justify-center text-sm w-80'><div className='flex items-center justify-center'>{item.FirstName} {item.SurName}</div></td>
                   <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{(item.Class=="none") ? <button className='bg-slate-500 rounded p-1 text-slate-100'>update</button> : item.Class}</div></td>
                   <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{(item.Stream=="none") ? <button className='bg-slate-500 rounded p-1 text-slate-100'>update</button> : item.Stream}</div></td>

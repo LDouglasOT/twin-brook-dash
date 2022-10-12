@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import {Routing,Header,Topstat,Popup,Table,New,Uniform,NoPage,Messages} from './components';
+import {Routing,Header,Topstat,Popup,Table,New,Uniform,NoPage,Messages,Correct,Login,Dashboard} from './components';
 import { useState } from 'react';
 import {MDBIcon} from "react-bootstrap-icons";
 import { BsPerson } from 'react-icons/bs';
@@ -12,9 +12,12 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import ProtectedRoutes from './Protectedroutes'
+import { useContext } from 'react';
+import {StateContext} from './Context/StateContextProvider'
 
 function Authenticated() {
-  const [visible,setVisible]=useState(false)
+  const {New,modify}= useContext(StateContext)
   const [stat,setStat]=useState([
     {
       'Name':'Students',
@@ -39,9 +42,8 @@ function Authenticated() {
 
 
   ])
-  const modulate=()=>{
-    setVisible(!visible)
-  }
+const [student,setStudent]=useState()
+
   return ( 
     <div className="flex bg-white-bg h-screen w-full">
       <div className='w-2/12 bg-slate-700 hover:overflow-auto fixed h-screen'>
@@ -53,7 +55,7 @@ function Authenticated() {
         </div>
         <br/>
         <br/>
-        <Routing modal={modulate}/>
+        <Routing/>
         </div>
       
       <div className='w-10/12 flex-col right-0 bg-white'>
@@ -70,24 +72,30 @@ function Authenticated() {
          </div>
          <div className='bg-slate-100 mt-20 p-3 right-0 absolute w-10/12'>
          <div className='h-full w-full right-0'>
-           <div className='w-full h-40 right-0'>
+           {/* <div className='w-full h-40 right-0'>
              <Header title="Students List" Page='students' home='Home'/>
              <div className="flex items-center justify-between">
                {stat.map((item,key)=>(
                  <Topstat className='drop-shadow-2xl' key={key} Name={item.Name} value={item.value} icon={ item.icon }/>
                ))}     
              </div>
-           </div>
+           </div> */}
            <div className='h-full w-full bg-white p-0'>
-          {visible ? <Popup/>:""}
+          {New ? <Popup/>:""}
+          {modify ? <Correct/>:""}
+  
          
          
       <Routes>
-        <Route path="/Students" element={ <Table/>}/>
-        <Route path="/Uniforms" element={ <Uniform/>}/>
-        <Route path="/Messages" element={ <Messages/>}/>
-        <Route path="/Dashboards" element={ <NoPage/>}/>
-        <Route path="*" element={<NoPage />} />
+       <Route path="/Login" element={ <Login/>}/>
+        <Route element={<ProtectedRoutes/>}>
+          <Route path="/Students" element={ <Table/>}/>
+          <Route path="/Uniforms" element={ <Uniform/>}/>
+          <Route path="/Messages" element={ <Messages/>}/>
+          <Route path="/Dashboards" element={ <Dashboard/>}/>
+          <Route path="*" element={<NoPage />} />
+        </Route>
+     
       </Routes>
            </div>
          </div>

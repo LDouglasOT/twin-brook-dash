@@ -8,3 +8,5 @@ export {default as Uniform } from "./Uniforms/Uniform"
 export {default as NoPage } from "./NoPage"
 export {default as Messages } from "./Messages"
 export {default as Login } from "./Login"
+export {default as Correct} from './Modal/Correct'
+export {default as Dashboard } from "./Dashboard"
