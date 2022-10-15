@@ -2,16 +2,69 @@ import React,{useContext} from 'react'
 import Route from './Route'
 import {BsFillDashSquareFill} from 'react-icons/bs'
 import {useState} from 'react'
-import {StateContext} from '../../Context/StateContextProvider'
-
+import {RiDashboardFill} from 'react-icons/ri'
+import {BsPersonFill} from 'react-icons/bs'
+import {FaMoneyCheckAlt} from 'react-icons/fa'
+import {RiShirtFill} from 'react-icons/ri'
+import {RiAccountPinBoxFill} from 'react-icons/ri'
+import {FiSettings} from 'react-icons/fi'
+import {GrLogout} from 'react-icons/gr'
+import {MdOutlineTextsms} from 'react-icons/md'
+import { AuthContext } from '../../Context/AuthContext';
 
 function Routing({modal}) {
+  const {popup}=useContext(AuthContext)
+  const [data,useData]=useState([
+    {
+      'route':"Dashboard",
+      'Lin':"/Dashboards",
+      icon:<RiDashboardFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Students",
+      'Lin':"/Students",
+      icon:<BsPersonFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Uniforms",
+      'Lin':"/Uniforms",
+      'icon':<RiShirtFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Messages",
+      'Lin':"/Messages",
+      'icon':<MdOutlineTextsms className='w-5 h-5'/>
+    },
+    {
+      'route':"Discounts",
+      'Lin':"/Discounts",
+      'icon':<BsPersonFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Transactions",
+      'Lin':"/transactions",
+      'icon':<BsPersonFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Parents",
+      'Lin':"/Parents",
+      'icon':<BsPersonFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Accounts",
+      'Lin':"/Accounts",
+      'icon':<RiAccountPinBoxFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Logout",
+      'Lin':"/Logout",
+      'icon':<GrLogout className='w-5 h-5'/>
+    },
  
-  const {New,modify,data}= useContext(StateContext)
-
+  ])
   return (
     <div className='w-full h-full flex-col items-center justify-center '>
-        <div onClick={()=>modal()} className="h-12 w-ful px-5 flex items-center rounded justify-between bg-slate-600 mt-1 text-white mx-3 hover:cursor-pointer hover:bg-slate-700 ">
+        <div onClick={()=>popup("new")} className="h-12 w-ful px-5 flex items-center rounded justify-between bg-slate-600 mt-1 text-white mx-3 hover:cursor-pointer hover:bg-slate-700 ">
         <BsFillDashSquareFill className='w-5 h-5'/>
        <div className="flex justify-justify w-3/4">
        <span className="text-lg hover:text-slate-400">Add</span> 

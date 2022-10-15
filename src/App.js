@@ -8,17 +8,17 @@ import {
 import Authenticated from './Authenticated'
 import {Login} from './components'
 import {useState} from 'react'
-import StateContextProvider from "./Context/StateContextProvider"
+import AuthContextProvider from "./Context/AuthContext"
 
 function App() {
   return (
-    <Router>
-      <StateContextProvider>
+    <AuthContextProvider>
+    <Router> 
     <div>
       <Authenticated/>
     </div>
-    </StateContextProvider>
     </Router>
+    </AuthContextProvider>
   )
 }
 

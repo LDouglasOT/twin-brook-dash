@@ -10,3 +10,8 @@ export {default as Messages } from "./Messages"
 export {default as Login } from "./Login"
 export {default as Correct} from './Modal/Correct'
 export {default as Dashboard } from "./Dashboard"
+export {default as Discounts} from "./Discounts"
+export {default as Pop} from "./Modal/Pop"
+export {default as Transactions} from "./Transactions"
+export {default as Parents} from "./Parents"
+export {default as Accounts} from "./Accounts"
