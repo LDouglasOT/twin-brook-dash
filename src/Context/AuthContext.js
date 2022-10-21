@@ -15,7 +15,7 @@ const AuthContextProvider=(props)=>{
     const [datalength,setDatalength]=useState(0)
     const [Newpop,setNew]=useState(false)
     const [update,setupdate]=useState(false)
-    const [authenticated,setAuthenticated]=useState(true)
+    const [authenticated,setAuthenticated]=useState(false)
     const [ipaycode,setupPaycode]=useState(false)
     let [loading, setLoading] = useState(false);
     const[schoolpaycode,setSchoolpaycode]=useState()
