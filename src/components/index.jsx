@@ -15,3 +15,4 @@ export {default as Pop} from "./Modal/Pop"
 export {default as Transactions} from "./Transactions"
 export {default as Parents} from "./Parents"
 export {default as Accounts} from "./Accounts"
+export {default as Confirm} from './Modal/Confirms'

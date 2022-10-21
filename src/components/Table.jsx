@@ -6,22 +6,33 @@ import {useDispatch} from "react-redux"
 import {students} from './feature/DataStore'
 import Dropdown from 'react-dropdown';
 import {MdOutlineTextsms} from 'react-icons/md'
+import {AiTwotoneDelete} from 'react-icons/ai'
 import 'react-dropdown/style.css';
 import { AuthContext } from '../Context/AuthContext';
 import { useContext } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import {Confirm} from './index'
+
 
 function Table() {
   const [table,setTable]=useState([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
   const [count,setCount]=useState(100)
   const {studentdata,fetchdata,updatecode,datalength}=useContext(AuthContext)
 
+  const [confirm,setConfirm]=useState(false)
   useEffect(()=> {
     fetchdata()
     const interval=setInterval(()=>{
       fetchdata()
+      
      },90000) 
      return()=>clearInterval(interval)
 },[0]);
+
+const cancel=()=>{
+  setConfirm(!confirm)
+}
+
 
   // const fetchdata=async()=>{
   //   const data=await axios.get("http://127.0.0.1:8000/student/")
@@ -67,6 +78,10 @@ const totalCollected=(data)=>{
   })
   console.log(total)
 }
+const submitdelete=()=>{
+  
+}
+
 const options = [
   'Baby','Middle','Top','P1', 'P2', 'P3','P4','P5','P6','P7'
 ];
@@ -77,6 +92,7 @@ const defaultOption = 'Filter stream';
 
   return (
     <div className='w-full drop-shadow-xl border bg-white overflow-hidden rounded-lg'>
+           {confirm ? <Confirm cancel={cancel()} submit={submitdelete()}/> :""}
             <div className='w-full h-12 drop-shadow-sm bg-white-bg rounded-t-lg px-10 flex justify-center items-center'>
               <Header title="Students List" Page={datalength} home='students'/> 
               <div className='w-60 mx-6'>
@@ -93,9 +109,9 @@ const defaultOption = 'Filter stream';
                 <tr className="border w-10">
                   <th className='flex items-center justify-center text-sm'>Code</th>
                   <th className='flex-col items-center justify-center text-sm w-80'>Name</th>
-                  <th className='flex-col items-center justify-center text-sm w-20'>Class</th>
-                  <th className='flex-col items-center justify-center text-sm w-20'>Stream</th>
-                  <th className='flex-col items-center justify-center text-sm'>Total</th>
+                  <th className='flex-col items-center justify-center text-sm w-40'>Class</th>
+                  <th className='flex-col items-center justify-center text-sm w-40'>Stream</th>
+                  <th className='flex-col items-center justify-center text-sm w-40'>Fees</th>
                   <th className='flex-col items-center justify-center text-sm'>Paid</th>
                   <th className='flex-col items-center justify-center text-sm'>Bal</th>
                   <th className='flex-col items-center justify-center text-sm'>Payable</th>
@@ -106,18 +122,18 @@ const defaultOption = 'Filter stream';
               <tbody>
               {studentdata.map((item,key)=>(
                 <tr className='border flex-row h-5'>
-                  <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center p-2'>{(item.Schoolpay==1) ? <button onClick={()=>updatecode()} className='bg-slate-500 rounded p-1 text-slate-100'>update code</button> : <div> {item.Schoolpay ? item.Schoolpay : <button className='bg-slate-500 rounded p-1 text-slate-100'>update code</button>}</div>}</div></td>
-                  <td className='items-center justify-center text-sm w-80'><div className='flex items-center justify-center'>{item.FirstName} {item.SurName}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{(item.Class=="none") ? <button className='bg-slate-500 rounded p-1 text-slate-100'>update</button> : item.Class}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{(item.Stream=="none") ? <button className='bg-slate-500 rounded p-1 text-slate-100'>update</button> : item.Stream}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Total}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Paid}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Bal}</div></td>
-                  <td className='items-center justify-center w-10 text-sm'><div className='flex items-center justify-center'>{item.Payable}</div></td>
-                  <td className='items-center justify-center w-10 text-sm border'><div className='flex items-center justify-center '>{item.Discount >0 ? item.Discount:<button className='text-lg bg-slate-500 text-white px-1 rounded-sm'>+</button>}</div></td>
+                  <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center p-2'>{item.PayCode}</div></td>
+                  <td className='items-center justify-center text-sm w-80'><div className='flex items-center justify-center'>{item.FirstName} {item.LastName}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Classname.fName}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Stream.streamname}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Classname.fees}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.fees.Paid}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.fees.Balance}</div></td>
+                  <td className='items-center justify-center w-10 text-sm'><div className='flex items-center justify-center'>{item.fees.Expected}</div></td>
+                  <td className='items-center justify-center w-10 text-sm border'><div className='flex items-center justify-center cursor:pointer'>{item.fees.discount < 1 ? <button onClick={()=>updatecode(item.PayCode,item.FirstName)} className='bg-slate-300 text-lg px-2 border'>+</button>:item.fees.discount}</div></td>
                   <td className='items-center justify-center w-20 text-sm border'><div className='flex items-center justify-center text-sm'>
                   <img src="https://img.icons8.com/material-rounded/18/000000/edit--v3.png" alt='' className='hover:cursor-pointer p-1 bg-green-500 rounded cursor-pointer'/>
-                  <MdOutlineTextsms className='w-6 h-6 mx-1 text-green-500 hover:cursor-pointer'/>
+                  <AiTwotoneDelete onClick={()=>setConfirm(!confirm)} className='w-6 h-7 bg-red-200 rounded m-1 mx-1 text-red-500 hover:cursor-pointer'/>
                     </div></td>
                 </tr>
                 ))}

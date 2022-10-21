@@ -18,7 +18,7 @@ import { useContext } from 'react';
 import { AuthContext } from './Context/AuthContext';
 
 function Authenticated() {
-  const {user,authenticated,Newpop,datalength}=useContext(AuthContext)
+  const {user,authenticated,Newpop,datalength,feesCollected,expected}=useContext(AuthContext)
 
   const [stat,setStat]=useState([
     {
@@ -26,11 +26,7 @@ function Authenticated() {
       'value':datalength,
       icon:<BsPerson fas icon="user" className='w-8 h-8'/>
     },
-    {
-      'Name':'Gaurdians',
-      'value':'31,022,000',
-      icon:<RiParentFill fas icon="user" className='w-8 h-8'/>
-    },
+
     {
       'Name':'Amount expected',
       'value':'600,000',
@@ -44,7 +40,7 @@ function Authenticated() {
   ])
 const [student,setStudent]=useState()
   
-  const { paycode,updatecode} =useContext(AuthContext)
+  const { ipaycode,updatecode} =useContext(AuthContext)
   return ( 
     <div className="flex bg-white-bg h-screen w-full">
        {authenticated ? 
@@ -80,16 +76,18 @@ const [student,setStudent]=useState()
             <div className='w-full h-40 right-0'>
              <Header title="Students List" Page='students' home='Home'/>
              <div className="flex items-center justify-between">
-               {stat.map((item,key)=>(
-                 <Topstat className='drop-shadow-2xl' key={key} Name={item.Name} value={item.value} icon={ item.icon }/>
-               ))}     
+          
+                 <Topstat className='drop-shadow-2xl' Name={'Students'} value={datalength} icon={ <BsPerson fas icon="user" className='w-8 h-8'/> }/>
+                 <Topstat className='drop-shadow-2xl' Name={'Fees COllected'} value={feesCollected} icon={<GiMoneyStack fas icon="user" className='w-10 h-8'/> }/>
+                 <Topstat className='drop-shadow-2xl' Name={'Amount Expected'} value={expected} icon={ <GiMoneyStack fas icon="user" className='w-10 h-8'/> }/>
+    
              </div>
            </div> 
            :""}
            <div className='h-full w-full bg-white p-0'>
            {Newpop ? <Popup/>:""}
          {/* {modify ? <Correct/>:""} */}
-          {paycode ? <Pop/>:""}      
+          {ipaycode ? <Pop/>:""}      
          
          
       <Routes>

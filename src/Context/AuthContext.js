@@ -1,5 +1,7 @@
 import axios from 'axios'
 import {createContext, useState} from 'react'
+import { useToast } from 'react-toastify'
+import {Poststudent} from './StudentOperations'
 
 
 export const AuthContext=createContext()
@@ -14,7 +16,19 @@ const AuthContextProvider=(props)=>{
     const [Newpop,setNew]=useState(false)
     const [update,setupdate]=useState(false)
     const [authenticated,setAuthenticated]=useState(true)
-    const [paycode,setupPaycode]=useState(false)
+    const [ipaycode,setupPaycode]=useState(false)
+    let [loading, setLoading] = useState(false);
+    const[schoolpaycode,setSchoolpaycode]=useState()
+    const[popupname,setPopupname]=useState()
+
+    const [expected,setExpected]=useState(0)
+    const [discountTotal,setDIscounttotal]=useState(0)
+    const [feesCollected,setfeesCollected]=useState(0)
+    const newitme=async(paycode,discount)=>{
+      if(ipaycode && discount){
+        console.log('sad')
+      }  
+    }
 
     const authenticate=async(credentials)=>{
             let auth= await axios.post('http://127.0.0.1:8000/student/apitokenauth/',credentials)
@@ -30,8 +44,15 @@ const AuthContextProvider=(props)=>{
                 }
             }
     }
-    const updatecode=()=>{
-        setupPaycode(!paycode)
+    const updatecode=(schoolpay,name)=>{
+        console.log(schoolpay)
+
+        if(schoolpay){
+            setSchoolpaycode(schoolpay)
+            setPopupname(name)
+            setupPaycode(!ipaycode)
+        }
+       
     }
     const login=(username,Password)=>{
         setUser("Luzinda Douglas")
@@ -47,30 +68,51 @@ const AuthContextProvider=(props)=>{
         }
     }
     const fetchdata=async()=>{
-        let token="4b3887b4fe9e1c049b9caee6759cfa25e8776633"
-        if(authenticated){
-
-            const data=await axios.get("http://127.0.0.1:8000/student/",{
-                headers: {
-                  'Authorization': `token ${token}`
-                }
-              })
-            if(data){
-                setData(data.data)
-                setDatalength(data.data.length)
-            }
-        
+        setLoading(true)
+        const data=await axios.get("http://127.0.0.1:8000/student/")
+        if(data){
+          console.log(data.data)
+          setDatalength(data.data.length)
+          setData(data.data)
+          setLoading(false)
+          let discounted=0
+          let total=0
+          let expectedamount=0
+          studentdata.map((item)=>{
+            console.log(item)
+            total += item.fees.Paid
+            discounted += item.fees.Percentage
+            expectedamount +=item.fees.Expected
+         
+          })
+          setDIscounttotal(discounted)
+          setfeesCollected(total)
+          setExpected(expectedamount)
         }
     }
 
 
-
     return(
-        <AuthContext.Provider value={{popup,update,Newpop,user,
-        token,login,authenticated,studentdata,datalength,authenticate,
+        <AuthContext.Provider value={{
+        popup,
+        login,
+        authenticate,
         fetchdata,
-        paycode,
-        updatecode
+        updatecode,
+        Poststudent,
+        update,
+        Newpop,
+        user,
+        token,
+        authenticated,
+        studentdata,
+        datalength,
+        ipaycode,
+        schoolpaycode,
+        popupname,
+        discountTotal,
+        feesCollected,
+        expected
         }}>
             {props.children}
         </AuthContext.Provider>

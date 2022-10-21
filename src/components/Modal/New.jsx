@@ -12,7 +12,6 @@ function New() {
             <Header title="New student/Teacher" />
             </div>
             <div>
-            {register ? <Student/> : <Teacher/>}
             </div>
     </div>
   )
