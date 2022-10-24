@@ -124,9 +124,9 @@ const defaultOption = 'Filter stream';
                 <tr className='border flex-row h-5'>
                   <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center p-2'>{item.PayCode}</div></td>
                   <td className='items-center justify-center text-sm w-80'><div className='flex items-center justify-center'>{item.FirstName} {item.LastName}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Classname.fName}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Stream.streamname}</div></td>
-                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.Classname.fees}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.formname.fName}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.stream}</div></td>
+                  <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.formname.fees}</div></td>
                   <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.fees.Paid}</div></td>
                   <td className='items-center justify-center text-sm'><div className='flex items-center justify-center'>{item.fees.Balance}</div></td>
                   <td className='items-center justify-center w-10 text-sm'><div className='flex items-center justify-center'>{item.fees.Expected}</div></td>

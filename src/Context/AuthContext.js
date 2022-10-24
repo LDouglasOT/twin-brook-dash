@@ -15,7 +15,7 @@ const AuthContextProvider=(props)=>{
     const [datalength,setDatalength]=useState(0)
     const [Newpop,setNew]=useState(false)
     const [update,setupdate]=useState(false)
-    const [authenticated,setAuthenticated]=useState(false)
+    const [authenticated,setAuthenticated]=useState(true)
     const [ipaycode,setupPaycode]=useState(false)
     let [loading, setLoading] = useState(false);
     const[schoolpaycode,setSchoolpaycode]=useState()
@@ -31,11 +31,12 @@ const AuthContextProvider=(props)=>{
     }
 
     const authenticate=async(credentials)=>{
-            let auth= await axios.post('http://127.0.0.1:8000/student/apitokenauth/',credentials)
+            let auth= await axios.post('https://django-fever.herokuapp.com/student/apitokenauth/',credentials)
             if(auth){
                 console.log(credentials)
                 let token=auth.data.token
                 setToken(token)
+                localStorage.setItem('token', token);
                 if(token){
                     setAuthenticated(true)
                     return true
@@ -55,7 +56,7 @@ const AuthContextProvider=(props)=>{
        
     }
     const login=(username,Password)=>{
-        setUser("Luzinda Douglas")
+        setUser(username)
         return true
     }
     const popup=(key)=>{
@@ -69,7 +70,8 @@ const AuthContextProvider=(props)=>{
     }
     const fetchdata=async()=>{
         setLoading(true)
-        const data=await axios.get("http://127.0.0.1:8000/student/")
+        let tokens="d73cef7b65902cb5110836f1320d6abad6275fca"
+        const data=await axios.get("https://django-fever.herokuapp.com/student/",{headers: {'Authorization': `token ${tokens}`}})
         if(data){
           console.log(data.data)
           setDatalength(data.data.length)
@@ -90,11 +92,7 @@ const AuthContextProvider=(props)=>{
           setExpected(expectedamount)
         }
     }
-
-
-    return(
-        <AuthContext.Provider value={{
-        popup,
+    const exports={ popup,
         login,
         authenticate,
         fetchdata,
@@ -112,7 +110,11 @@ const AuthContextProvider=(props)=>{
         popupname,
         discountTotal,
         feesCollected,
-        expected
+        expected}
+
+    return(
+        <AuthContext.Provider value={{
+       ...exports
         }}>
             {props.children}
         </AuthContext.Provider>

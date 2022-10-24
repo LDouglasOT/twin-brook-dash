@@ -1,24 +1,24 @@
 import React,{useContext} from 'react'
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../Context/AuthContext';
-
+import "./index.css"
 function Login() {
 const navigate=useNavigate()
 const {authenticate,authenticated}=useContext(AuthContext)
 const credentials={}
 const handleSubmit=()=>{
-
 let cred=authenticate(credentials)
 if(cred){
   console.log(authenticate)
-  navigate("/Students")
+  navigate("/")
 }
-
-
 }
 
   return (
-    <div className='w-full h-screen drop-shadow-xl border bg-white overflow-hidden rounded-lg'>
+    <div
+    
+    className='wrapping'>
+    <div>
       
         <div className="w-3/6 mx-auto my-3 rounded-lg border-4 bg-slate-900 p-10 flex flex-col">
         <div className="w-full flex justify-center flex-col align-center">
@@ -29,14 +29,12 @@ if(cred){
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">UserName</label>
                 <input onChange={(e)=>{
                   credentials.username=e.target.value
-                  console.log(credentials.username)
                 }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Semakula" required=""/>
             </div>
             <div>
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
                 <input onChange={(e)=>{
                   credentials.password=e.target.value
-                  console.log(credentials.password)
                 }} type="password" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bashir" required=""/>
             </div>
             <div className="w-full flex justify-center">
@@ -46,6 +44,7 @@ if(cred){
         </div>
         <div>
         </div>
+   </div>
    </div>
   )
 }
