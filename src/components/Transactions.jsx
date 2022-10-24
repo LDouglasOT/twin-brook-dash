@@ -7,14 +7,7 @@ function Transactions() {
 
 const [discount,setDiscount]=useState([])
 
-useEffect(async()=>{
-  const data= await axios.get('http://localhost:8000/student/transactions/')
-  if(data){
-    setDiscount(data.data)
-    console.log(discount)
-  }
 
-},[0])
 
 if(!discount){
 return <h4>Loading TRansactions</h4>

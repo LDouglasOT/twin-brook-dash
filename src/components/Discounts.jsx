@@ -106,10 +106,10 @@ if(loading){
         <tr className='border flex-row h-5'>
         
           <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item.FirstName} {item.LastName}</div></td>
-          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.Classname.fName}</div></td>
-          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.Stream.streamname}</div></td>
+          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.formname.fName}</div></td>
+          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.stream}</div></td>
           <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center '>{item.fees.discount}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.Classname.fees}</div></td>
+          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.formname.fees}</div></td>
           <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.fees.Expected}</div></td>
           <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.fees.Balance}</div></td>
           <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>
