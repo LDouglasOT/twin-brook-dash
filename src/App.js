@@ -9,9 +9,13 @@ import Authenticated from './Authenticated'
 import {Login} from './components'
 import {useState} from 'react'
 import AuthContextProvider from "./Context/AuthContext"
+import FetchContextProvider from "./Context/FetchCOntroller"
+import PopupContextProvider from './Context/Popupcontroller'
 
 function App() {
   return (
+    <PopupContextProvider>
+    <FetchContextProvider>
     <AuthContextProvider>
     <Router> 
     <div>
@@ -19,6 +23,8 @@ function App() {
     </div>
     </Router>
     </AuthContextProvider>
+    </FetchContextProvider>
+    </PopupContextProvider>
   )
 }
 

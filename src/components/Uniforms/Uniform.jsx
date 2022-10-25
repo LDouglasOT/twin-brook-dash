@@ -10,7 +10,7 @@ const [table,setTable]=useState([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
 const {studentdata,datalength}=useContext(AuthContext)
   return (
     <div className="w-full h-full bg-white-bg border  rounded px-5 py-2">
-      <Header title="Uniforms payment details" Page='students' home='2500'/>
+      <Header title="Uniforms payment details" Page='Transactions' home='2500'/>
       <div className='w-full bg-white-bg h-full'>
       <table className="table-auto w-full border h-screen ">
               <thead className=''>
@@ -42,7 +42,7 @@ const {studentdata,datalength}=useContext(AuthContext)
                   <td className='items-center justify-center border'><div className='flex items-center justify-center text-green-500'>Yes</div></td>
                   <td className='items-center justify-center border'><div className='flex items-center justify-center text-green-500'>Yes</div></td>
                   <td className='items-center justify-center border w-40'><div className='flex items-center justify-center text-sm'>
-                      <button className='border p-2 rounded bg-green-500 text-white'>Update</button>
+                      <button className='border p-2 rounded bg-green-500 text-white'>Charge</button>
                       </div>
                   </td>
                 </tr>

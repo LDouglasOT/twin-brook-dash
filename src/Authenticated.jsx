@@ -16,10 +16,11 @@ import {
 import ProtectedRoutes from './Protectedroutes'
 import { useContext } from 'react';
 import { AuthContext } from './Context/AuthContext';
+import { FetchContext } from './Context/FetchCOntroller';
 
 function Authenticated() {
-  const {user,authenticated,Newpop,datalength,feesCollected,expected}=useContext(AuthContext)
-
+  const {user,authenticated,Newpop}=useContext(AuthContext)
+  const {datalength,feesCollected,expected} =useContext(FetchContext)
   const [stat,setStat]=useState([
     {
       'Name':'Students',

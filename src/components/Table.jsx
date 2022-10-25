@@ -12,12 +12,27 @@ import { AuthContext } from '../Context/AuthContext';
 import { useContext } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import {Confirm} from './index'
+import { FetchContext } from '../Context/FetchCOntroller';
 
 
 function Table() {
   const [table,setTable]=useState([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
   const [count,setCount]=useState(100)
-  const {studentdata,fetchdata,updatecode,datalength}=useContext(AuthContext)
+  const {
+    transactions,
+    fetchTransactions,
+    loading,
+    updatecode,
+    datalength,
+    expected,
+    discountTotal,
+    feesCollected,
+    schoolpaycode,
+    popupname,
+    ipaycode,
+    fetchdata,
+    studentdata
+  }=useContext(FetchContext)
 
   const [confirm,setConfirm]=useState(false)
   useEffect(()=> {

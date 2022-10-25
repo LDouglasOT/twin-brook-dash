@@ -2,15 +2,20 @@ import React from 'react'
 import { useEffect } from 'react'
 import {useState} from 'react'
 import axios  from 'axios'
+import { FetchContext } from '../Context/FetchCOntroller';
+import { useContext } from 'react'
 
 function Transactions() {
 
 const [discount,setDiscount]=useState([])
+const {transactions,fetchTransactions,loading}=useContext(FetchContext)
 
+useEffect(()=>{
+  fetchTransactions()
+},[0])
 
-
-if(!discount){
-return <h4>Loading TRansactions</h4>
+if(loading){
+return <h4>Loading Transactions</h4>
 }
   return (
 
@@ -40,7 +45,7 @@ return <h4>Loading TRansactions</h4>
         </tr> 
       </thead>
       <tbody>
-      {discount.map((item,key)=>(
+      {transactions.map((item,key)=>(
         <tr className='border flex-row h-5' key={key}>
           <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item.student.FirstName} {item.student.LastName}</div></td> 
          <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center'>{item.amountpaid}</div></td>

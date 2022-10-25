@@ -10,7 +10,7 @@ function Dashboard() {
   ])
     return (
     <div className='w-full drop-shadow-xl border bg-white overflow-hidden rounded-lg h-screen'>
-        {/* <div>
+        <div>
             <div className='flex justify-between'>
             <div className='bg-white w-6/12 h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
             <h3 className='mx-auto text-center text-lg font-black lining-nums'>Termly Payment Percentage</h3>
@@ -21,7 +21,7 @@ function Dashboard() {
             <div className='bg-white w-6/12 h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
             </div>
             </div>
-        </div> */}
+        </div>
         <h3>Feature coming soon</h3>
    </div>
   )

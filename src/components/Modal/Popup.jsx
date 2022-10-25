@@ -7,8 +7,10 @@ import { data } from 'autoprefixer';
 import axios from 'axios'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import {PopupContext} from "../../Context/Popupcontroller"
 
 function Popup({ modulate }) {
+  const {PostNewStudent}=useContext(PopupContext)
   const { popup } = useContext(AuthContext)
   const [FirstName, setFirstName] = useState()
   const [LastName, setLastName] = useState()
@@ -69,17 +71,10 @@ function Popup({ modulate }) {
                   'fullnames': fullnames,
                   'Uniform': Uniform,
                 }
-
-                console.log(data)
-                const posts = await axios.post('https://django-fever.herokuapp.com/student/', data)
-
-                if (posts.status == 201) {
-                  popup("new", 1)
-                  toast("Student successfully added")
-                } else {
-                  toast("Please correct some information and try again")
-                }
-
+               const post= PostNewStudent(data)
+               if(post){
+                popup("new", 1)
+               }
               }
 
             }>
