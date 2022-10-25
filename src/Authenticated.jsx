@@ -41,7 +41,7 @@ function Authenticated() {
   ])
 const [student,setStudent]=useState()
   
-  const { ipaycode,updatecode} =useContext(AuthContext)
+  const { ipaycode,updatecode} =useContext(FetchContext)
   return ( 
     <div className="flex bg-white-bg h-screen w-full">
        {authenticated ? 
@@ -73,7 +73,7 @@ const [student,setStudent]=useState()
           :""}
          <div className='bg-slate-100 mt-20 p-3 right-0 absolute w-10/12'>
          <div className='h-full w-full right-0'>
-          {authenticated ? 
+          {/* {authenticated ? 
             <div className='w-full h-40 right-0'>
              <Header title="Students List" Page='students' home='Home'/>
              <div className="flex items-center justify-between">
@@ -84,7 +84,7 @@ const [student,setStudent]=useState()
     
              </div>
            </div> 
-           :""}
+           :""} */}
            <div className='h-full w-full bg-white p-0'>
            {Newpop ? <Popup/>:""}
          {/* {modify ? <Correct/>:""} */}

@@ -1,10 +1,10 @@
 import React,{useContext} from 'react'
 import { useState } from 'react'
-import {AuthContext} from  "../../Context/AuthContext"
+import {FetchContext} from  "../../Context/FetchCOntroller"
 import axios from 'axios'
 
 function Pop() {
-    const {updatecode,popupname,schoolpaycode}=useContext(AuthContext)
+    const {updatecode,popupname,schoolpaycode}=useContext(FetchContext)
     const [discount,setDiscount]=useState()
   return (
     <>
@@ -29,7 +29,7 @@ function Pop() {
           "PayCode":schoolpaycode,
           "Discount":discount
         }
-        let res= await axios.post("http://127.0.0.1:8000/student/discount/",data)
+        let res= await axios.post("https://django-fever.herokuapp.com/student/discount/",data)
         if(res.status=201){
           updatecode("lee",1)
         }

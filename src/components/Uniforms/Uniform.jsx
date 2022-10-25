@@ -1,13 +1,20 @@
 import React from 'react'
 import {Header,Popup} from '../'
-import {useState} from 'react'
-import { AuthContext } from '../../Context/AuthContext';
+import {useState,useEffect} from 'react'
+import { FetchContext } from '../../Context/FetchCOntroller';
 import { useContext } from 'react'
 
 
 function Uniform() {
 const [table,setTable]=useState([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
-const {studentdata,datalength}=useContext(AuthContext)
+const {studentdata,datalength,fetchdata}=useContext(FetchContext)
+
+useEffect(()=>{
+  
+  fetchdata()
+
+},[0])
+
   return (
     <div className="w-full h-full bg-white-bg border  rounded px-5 py-2">
       <Header title="Uniforms payment details" Page='Transactions' home='2500'/>

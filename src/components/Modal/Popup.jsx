@@ -8,6 +8,8 @@ import axios from 'axios'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import {PopupContext} from "../../Context/Popupcontroller"
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 function Popup({ modulate }) {
   const {PostNewStudent}=useContext(PopupContext)
@@ -28,6 +30,27 @@ function Popup({ modulate }) {
   const [Paid, setPaid] = useState()
   const [Uniform, setUniform] = useState()
   const [Discount, setDiscount] = useState()
+
+ const createNotification = (type,message) => {
+    return () => {
+      switch (type) {
+        case 'info':
+          NotificationManager.info('Info message');
+          break;
+        case 'success':
+          NotificationManager.success('Success message', 'Title here');
+          break;
+        case 'warning':
+          NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+          break;
+        case 'error':
+          NotificationManager.error('Error message', 'Click me!', 5000, () => {
+            alert('callback');
+          });
+          break;
+      }
+    };
+  };
 
   const newstudent = {}
   const options = [
@@ -71,8 +94,11 @@ function Popup({ modulate }) {
                   'fullnames': fullnames,
                   'Uniform': Uniform,
                 }
+                console.log("///////////////////////")
                const post= PostNewStudent(data)
                if(post){
+                console.log(post)
+                NotificationManager.success('Success', 'Student registered successfully');
                 popup("new", 1)
                }
               }

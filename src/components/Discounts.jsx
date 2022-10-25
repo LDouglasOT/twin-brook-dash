@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState,useEffect,CSSProperties} from 'react'
-import { AuthContext } from '../Context/AuthContext';
+import { FetchContext } from '../Context/FetchCOntroller';
 import ClipLoader from "react-spinners/ClipLoader";
 import { useContext } from 'react'
 
@@ -51,7 +51,7 @@ const [discount,setDiscount]=useState([
         "Final":900000
     }
 ])
-const {studentdata,fetchdata,updatecode,loading,discountTotal}=useContext(AuthContext)
+const {studentdata,fetchdata,updatecode,loading,discountTotal}=useContext(FetchContext)
 let [color, setColor] = useState("#ffffff");
 const override: CSSProperties = {
   display: "block",
@@ -86,6 +86,7 @@ if(loading){
 
   return (
     <div className='w-full h-screen drop-shadow-xl border bg-white overflow-hidden rounded-lg'>
+       
       <h3 className='text-slate-500  mx-4 my-1'>Total: USh {discountTotal}</h3>
     <table className="table table-striped table-bordered table-list w-full bg-white-bg">
     

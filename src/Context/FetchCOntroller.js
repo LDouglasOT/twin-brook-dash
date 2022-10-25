@@ -31,7 +31,7 @@ const FetchContextProvider=(props)=>{
     const fetchdata=async()=>{
       
         let tokens="d73cef7b65902cb5110836f1320d6abad6275fca"
-        const data=await axios.get("http://127.0.0.1:8000/student/")
+        const data=await axios.get("https://django-fever.herokuapp.com/student/")
         if(data){
           console.log(data.data)
           setDatalength(data.data.length)
@@ -74,8 +74,8 @@ const exports={
     updatecode,
     datalength,
     expected,
-    discountTotal,
     feesCollected,
+    discountTotal,
     schoolpaycode,
     popupname,
     ipaycode,fetchdata,studentdata

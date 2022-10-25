@@ -10,6 +10,7 @@ const PopupContextProvider=(props)=>{
 
 const PostNewStudent=async(data)=>{
     console.log(data)
+    console.log("2223s////////////////////////////////")
     const posts = await axios.post('https://django-fever.herokuapp.com/student/', data)
     if (posts.status == 201) {
         console.log(posts)

@@ -22,16 +22,11 @@ function Table() {
     transactions,
     fetchTransactions,
     loading,
-    updatecode,
     datalength,
-    expected,
-    discountTotal,
-    feesCollected,
-    schoolpaycode,
-    popupname,
-    ipaycode,
     fetchdata,
-    studentdata
+    studentdata,
+    updatecode
+  
   }=useContext(FetchContext)
 
   const [confirm,setConfirm]=useState(false)
@@ -86,7 +81,7 @@ const postdata=async(item)=>{
   })
 console.log(data)
 }
-const totalCollected=(data)=>{
+const PostNewStudent=(data)=>{
   var total=0 
   data.forEach((item)=>{
     total +=item.Paid

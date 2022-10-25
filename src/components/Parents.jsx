@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
-import { AuthContext } from '../Context/AuthContext';
+import { FetchContext } from '../Context/FetchCOntroller';
 import { useContext } from 'react'
 
 function Parents() {
-  const {studentdata,datalength}=useContext(AuthContext)
+  const {studentdata,fetchdata}=useContext(FetchContext)
 
 useEffect(()=>{
-console.log(studentdata)
+  fetchdata()
 },[0])
   return (
     <div className='w-full h-screen drop-shadow-xl border bg-white overflow-hidden rounded-lg'>
