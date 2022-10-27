@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import {Routing,Parents,Accounts,Transactions,
   Discounts,Header,Pop,Topstat,Popup,Table,pop,Uniform,NoPage,Messages,Correct,Login,Dashboard} from './components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {MDBIcon} from "react-bootstrap-icons";
 import { BsPerson } from 'react-icons/bs';
 import {RiParentFill} from 'react-icons/ri';
@@ -40,8 +40,10 @@ function Authenticated() {
     }
   ])
 const [student,setStudent]=useState()
-  
   const { ipaycode,updatecode} =useContext(FetchContext)
+  useEffect(()=>{
+    
+  })
   return ( 
     <div className="flex bg-white-bg h-screen w-full">
        {authenticated ? 
@@ -97,7 +99,7 @@ const [student,setStudent]=useState()
           <Route path="/Students" element={ <Table/>}/>
           <Route path="/Uniforms" element={ <Uniform/>}/>
           <Route path="/Messages" element={ <Messages/>}/>
-          <Route path="/Dashboards" element={ <Dashboard/>}/>
+          <Route path="/" element={ <Dashboard/>}/>
           <Route path="/Discounts" element={ <Discounts/>}/>
           <Route path="/transactions" element={ <Transactions/>}/>
           <Route path="/Parents" element={ <Parents/>}/>

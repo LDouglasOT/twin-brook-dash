@@ -17,7 +17,7 @@ function Routing({modal}) {
   const [data,useData]=useState([
     {
       'route':"Dashboard",
-      'Lin':"/Dashboards",
+      'Lin':"/",
       icon:<RiDashboardFill className='w-5 h-5'/>
     },
     {

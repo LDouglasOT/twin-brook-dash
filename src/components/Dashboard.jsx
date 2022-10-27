@@ -24,33 +24,59 @@ function Dashboard() {
           </div>
             <div className='flex justify-between'>
               
-            <div className='bg-white w-6/12 h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
+            <div className='bg-white w-6/12 h-90 m-0 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
             <h3 className='mx-auto text-center text-lg font-black lining-nums'>Termly Payment Percentage</h3>
-            <div className='w-full h-full flex justify-center'>
+         
+            <div className='w-full flex-col h-full flex justify-center'>
+            <div className='flex justify-center items-center m-0'>
+                <div>
+                  <span className='bg-purple-600 px-2 mx-1'></span>Collected
+                </div>
+                <div>
+                  <span className='bg-blue-800 px-2 mx-1'></span>Expected
+                </div>
+            </div>
             <PieChart data={Fees} radius="38" label={()=>Fees.title}/>
             </div>
             </div>
-            <div className='flex flex-wrap bg-white w-6/12 h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
-              <div className='flex p-4 bg-slate-800 w-80 h-32 rounded m-5 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Total Fees Paid</h2>
-                <h3 className='text-slate-200 text-2xl'>USh {feesCollected}</h3>
+            <div className='flex items-center justify-center flex-wrap bg-white p-0 w-8/12 h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Fees Paid</h2>
+                {feesCollected ? <h3 className='text-slate-200 text-2xl'>USh {feesCollected}</h3>:<h3 className='text-white text-sm'>Loading.....</h3>}     
               </div>
-              <div className='flex p-4 bg-slate-800 w-80 h-32 rounded m-5 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Total Fees Expected</h2>
-                <h3 className='text-slate-200 text-2xl'>USh {expected}</h3>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-white text-sm'>Fees Expected</h2>
+                {expected ? <h3 className='text-slate-200 text-2xl'>USh {expected}</h3>:<h3 className='text-white text-sm'>Loading...</h3>}
               </div>
-              <div className='flex p-4 bg-slate-800 w-80 h-32 rounded m-5 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Total Discounted fee</h2>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Discounted fee</h2>
                 <h3 className='text-slate-200 text-2xl'>30%</h3>
               </div>
-              <div className='flex p-4 bg-slate-800 w-80 h-32 rounded m-5 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Total Students</h2>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Students</h2>
                 <h3 className='text-slate-200 text-2xl'>2400</h3>
               </div>
             </div>
             </div>
+            <div className='flex items-center justify-center flex-wrap bg-white p-0 w-full h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Fees Paid</h2>
+                {feesCollected ? <h3 className='text-slate-200 text-2xl'>USh {feesCollected}</h3>:<h3 className='text-white text-sm'>Loading.....</h3>}     
+              </div>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-white text-sm'>Fees Expected</h2>
+                {expected ? <h3 className='text-slate-200 text-2xl'>USh {expected}</h3>:<h3 className='text-white text-sm'>Loading...</h3>}
+              </div>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Discounted fee</h2>
+                <h3 className='text-slate-200 text-2xl'>30%</h3>
+              </div>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Students</h2>
+                <h3 className='text-slate-200 text-2xl'>2400</h3>
+              </div>
+            </div>
         </div>
-        <h3>Feature coming soon</h3>
    </div>
   )
 }
