@@ -9,6 +9,7 @@ function Transactions() {
 
 const [discount,setDiscount]=useState([])
 const {transactions,fetchTransactions,loading}=useContext(FetchContext)
+const [search,searchvalue]=useState("")
 
 useEffect(()=>{
   fetchTransactions()
@@ -28,7 +29,7 @@ return <h4>Loading Transactions</h4>
         </div>
     
       <h3 className='text-xl text-slate-800'>Fees transactions</h3>
-      <input type="text" className='' placeholder='Search transaction' />
+      <input type="text" onChange={(e)=>searchvalue(e.target.value)} className='' placeholder='Search transaction' />
       </div>
 
       {!discount ? <h4>Loading...</h4>:
@@ -45,14 +46,14 @@ return <h4>Loading Transactions</h4>
         </tr> 
       </thead>
       <tbody>
-      {transactions.map((item,key)=>(
+      {transactions.filter(name => name.studentName.match(new RegExp(search, "i"))).map((item,key)=>(
         <tr className='border flex-row h-5' key={key}>
-          <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item.student.FirstName} {item.student.LastName}</div></td> 
-         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center'>{item.amountpaid}</div></td>
-          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center'>{item.RecieptNumber}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.payment_date}</div></td>
-          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.PayCode}</div></td>
-          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.payment_channel}</div></td>
+          <td className='items-center justify-center text-sm w-80 border p-2'>{item.studentName ? <div className='flex items-center justify-center'>{item.studentName}</div>:<h3>None</h3>}</td> 
+         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center'>{item.amount}</div></td>
+          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center'>{item.schoolpayReceiptNumber}</div></td>
+          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.paymentDateAndTime}</div></td>
+          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.studentPaymentCode}</div></td>
+          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.sourceChannelTransactionId}</div></td>
         </tr>
         ))}
       </tbody>

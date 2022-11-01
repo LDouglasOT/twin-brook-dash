@@ -4,8 +4,14 @@ import {useState} from 'react'
 import { FetchContext } from '../Context/FetchCOntroller';
 import { useContext } from 'react'
 import {Header} from './index';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function Dashboard() {
+  const [dashboard,setDashboaard]=useState(0)
+  const [Paid,setPaid]=useState(0)
+  const [Bal,setBal]=useState(0)
+  const [num,setNum]=useState(0)
   const {
     expected,
     feesCollected,
@@ -16,6 +22,21 @@ function Dashboard() {
     { title: 'Balance', value: data, color: '#C13C37' },
     { title: 'Three', value: 20, color: '#6A2135' },
   ])
+  useEffect(()=> {
+    fetchdata()
+},[0]);
+
+const fetchdata=async()=>{
+  const data=await axios.get("http://localhost:3001/dashboard")
+    if(data){
+      console.log(data)
+      setDashboaard(data.data.message.Expected)
+      setPaid(data.data.message.Paid)
+      setBal(data.data.message.bal)
+      setNum(data.data.message.active)
+    }
+}
+
     return (
     <div className='w-full drop-shadow-xl border bg-white overflow-hidden rounded-lg h-screen'>
         <div>
@@ -39,43 +60,34 @@ function Dashboard() {
             <PieChart data={Fees} radius="38" label={()=>Fees.title}/>
             </div>
             </div>
-            <div className='flex items-center justify-center flex-wrap bg-white p-0 w-8/12 h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
+            <div className='flex items-center justify-center flex-wrap bg-white p-0 w-8/12 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
               <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
                 <h2 className='text-slate-200 text-sm'>Fees Paid</h2>
-                {feesCollected ? <h3 className='text-slate-200 text-2xl'>USh {feesCollected}</h3>:<h3 className='text-white text-sm'>Loading.....</h3>}     
+                {Paid ? <h3 className='text-slate-200 text-2xl'>USh {Paid}</h3>:<h3 className='text-white text-sm'>Loading.....</h3>}     
               </div>
               <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
                 <h2 className='text-white text-sm'>Fees Expected</h2>
-                {expected ? <h3 className='text-slate-200 text-2xl'>USh {expected}</h3>:<h3 className='text-white text-sm'>Loading...</h3>}
-              </div>
-              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Discounted fee</h2>
-                <h3 className='text-slate-200 text-2xl'>30%</h3>
+                {dashboard ? <h3 className='text-slate-200 text-2xl'>USh {dashboard}</h3>:<h3 className='text-white text-sm'>Loading...</h3>}
               </div>
               <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
                 <h2 className='text-slate-200 text-sm'>Students</h2>
+                <h3 className='text-slate-200 text-2xl'>{num}</h3>
+              </div>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Balances</h2>
+                <h3 className='text-slate-200 text-2xl'>{Bal}</h3>
+              </div>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Discount</h2>
+                <h3 className='text-slate-200 text-2xl'>20</h3>
+              </div>
+              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
+                <h2 className='text-slate-200 text-sm'>Inactive</h2>
                 <h3 className='text-slate-200 text-2xl'>2400</h3>
               </div>
             </div>
             </div>
-            <div className='flex items-center justify-center flex-wrap bg-white p-0 w-full h-80 m-2 rounded drop-shadow-2xl fill-teal-200 backdrop-blur'>
-              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Fees Paid</h2>
-                {feesCollected ? <h3 className='text-slate-200 text-2xl'>USh {feesCollected}</h3>:<h3 className='text-white text-sm'>Loading.....</h3>}     
-              </div>
-              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-white text-sm'>Fees Expected</h2>
-                {expected ? <h3 className='text-slate-200 text-2xl'>USh {expected}</h3>:<h3 className='text-white text-sm'>Loading...</h3>}
-              </div>
-              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Discounted fee</h2>
-                <h3 className='text-slate-200 text-2xl'>30%</h3>
-              </div>
-              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Students</h2>
-                <h3 className='text-slate-200 text-2xl'>2400</h3>
-              </div>
-            </div>
+        
         </div>
    </div>
   )

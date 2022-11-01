@@ -28,36 +28,23 @@ const FetchContextProvider=(props)=>{
         }
        
     }
-    const fetchdata=async()=>{
-      
-        let tokens="d73cef7b65902cb5110836f1320d6abad6275fca"
-        const data=await axios.get("https://django-fever.herokuapp.com/student/")
+    const fetchdata=async()=>{ 
+        const data=await axios.get("http://localhost:3001/new/students/")
         if(data){
-          console.log(data.data)
-          setDatalength(data.data.length)
-          setData(data.data)
+          console.log(data.data.message)
+          setDatalength(data.data.message.length)
+          setData(data.data.message)
           setLoading(false)
-          let discounted=0
-          let total=0
-          let expectedamount=0
-          studentdata.map((item)=>{
-            console.log(item)
-            total += item.fees.Paid
-            discounted += item.fees.Percentage
-            expectedamount +=item.fees.Expected
-         
-          })
-          setDIscounttotal(discounted)
-          setfeesCollected(total)
-          setExpected(expectedamount)
         }
+        return data
     }
 
     const fetchTransactions=async()=>{
-        let res =await axios.get("http://127.0.0.1:8000/student/transactions/")
+        let res =await axios.get("http://localhost:3001/transacts")
         if(res){
-           console.log(res.data)
-           seTransactions(res.data)
+           console.log(res.data.message)
+
+           seTransactions(res.data.message)
            setLoading(false)
         }
     }

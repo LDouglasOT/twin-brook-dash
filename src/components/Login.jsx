@@ -20,8 +20,8 @@ if(cred){
     className='wrapping'>
     <div>
       
-        <div className="w-3/6 mx-auto my-3 rounded-lg border-4 bg-slate-900 p-10 flex flex-col">
-        <div className="w-full flex justify-center flex-col align-center">
+        <div className="mx-auto my-3 w-90 rounded-lg border-4 bg-slate-900 p-10">
+        <div className="flex justify-center flex-col align-center">
              <h3 className='mx-auto my-2 text-slate-500 font-extrabold text-xl'>Welcom to Twinbrook International</h3>
        </div>
   

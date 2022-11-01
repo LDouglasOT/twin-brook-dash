@@ -106,13 +106,13 @@ if(loading){
       {studentdata.map((item,key)=>(
         <tr className='border flex-row h-5'>
         
-          <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item.FirstName} {item.LastName}</div></td>
-          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.formname.fName}</div></td>
-          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.stream}</div></td>
-          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center '>{item.fees.discount}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.formname.fees}</div></td>
-          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.fees.Expected}</div></td>
-          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.fees.Balance}</div></td>
+          <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item.FirstName} {item.SurName}</div></td>
+          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.Class}</div></td>
+          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center'>{item.Stream}</div></td>
+          <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center '>{item.Discount}</div></td>
+          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.Payable}</div></td>
+          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.Expected}</div></td>
+          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>{item.Bal}</div></td>
           <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>
             <button className='p-1 bg-red-500 text-white mx-1 rounded hover:bg-red-700' onClick={()=>removediscount(item)}>Remove discount</button>
             </div></td>

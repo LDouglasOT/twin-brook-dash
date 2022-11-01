@@ -7,12 +7,12 @@ import { data } from 'autoprefixer';
 import axios from 'axios'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import {PopupContext} from "../../Context/Popupcontroller"
+import { PopupContext } from "../../Context/Popupcontroller"
 // import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 function Popup({ modulate }) {
-  const {PostNewStudent}=useContext(PopupContext)
+  const { PostNewStudent } = useContext(PopupContext)
   const { popup } = useContext(AuthContext)
   const [FirstName, setFirstName] = useState()
   const [LastName, setLastName] = useState()
@@ -31,26 +31,26 @@ function Popup({ modulate }) {
   const [Uniform, setUniform] = useState()
   const [Discount, setDiscount] = useState()
 
-//  const createNotification = (type,message) => {
-//     return () => {
-//       switch (type) {
-//         case 'info':
-//           NotificationManager.info('Info message');
-//           break;
-//         case 'success':
-//           NotificationManager.success('Success message', 'Title here');
-//           break;
-//         case 'warning':
-//           NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-//           break;
-//         case 'error':
-//           NotificationManager.error('Error message', 'Click me!', 5000, () => {
-//             alert('callback');
-//           });
-//           break;
-//       }
-//     };
-//   };
+  //  const createNotification = (type,message) => {
+  //     return () => {
+  //       switch (type) {
+  //         case 'info':
+  //           NotificationManager.info('Info message');
+  //           break;
+  //         case 'success':
+  //           NotificationManager.success('Success message', 'Title here');
+  //           break;
+  //         case 'warning':
+  //           NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+  //           break;
+  //         case 'error':
+  //           NotificationManager.error('Error message', 'Click me!', 5000, () => {
+  //             alert('callback');
+  //           });
+  //           break;
+  //       }
+  //     };
+  //   };
 
   const newstudent = {}
   const options = [
@@ -79,28 +79,30 @@ function Popup({ modulate }) {
 
                 data = {
                   'FirstName': FirstName,
-                  'LastName': LastName,
+                  'SurName': LastName,
                   'MiddleName': MiddleName,
-                  'Age': Age,
+                  'Age': parseInt(Age),
                   'Residence': Residence,
-                  'Discount': Discount,
+                  'Discount': parseInt(Discount),
                   'Transport': Transport,
-                  'PayCode': PayCode,
+                  'Studentcode': PayCode,
                   'ClassName': classname,
-                  'stream': Stream,
-                  'Paid': Paid,
-                  'Phone': Phone,
-                  'email': email,
+                  'Stream': Stream,
+                  'Paid': parseInt(Paid),
+                  'mobile_phone': Phone,
+                  'Email': email,
                   'fullnames': fullnames,
                   'Uniform': Uniform,
+                  'StudentID': 0,
+                  'Gender': "M",
+                  'nationality': Nationality
                 }
-                console.log("///////////////////////")
-               const post= PostNewStudent(data)
-               if(post){
-                console.log(post)
-                //NotificationManager.success('Success', 'Student registered successfully');
-                popup("new", 1)
-               }
+                const post = PostNewStudent(data)
+                if (post) {
+                  console.log(post)
+                  //NotificationManager.success('Success', 'Student registered successfully');
+                  // popup("new", 1)
+                }
               }
 
             }>
@@ -143,7 +145,7 @@ function Popup({ modulate }) {
                     <option >Select cLass</option>
                     <option value="Dove">Dove</option>
                     <option value="Penguin">Penguin</option>
-                    <option value="Eagles">Eagles</option>
+                    students            <option value="Eagles">Eagles</option>
                     <option value="Parrot">Parrot</option>
                     <option value="Pegeon">Pegeon</option>
                   </select>

@@ -17,8 +17,7 @@ const AuthContextProvider=(props)=>{
     const [authenticated,setAuthenticated]=useState(true)
 
     let [loading, setLoading] = useState(false);
-
-    
+       
     const login=(username,Password)=>{
         setUser(username)
         return true
