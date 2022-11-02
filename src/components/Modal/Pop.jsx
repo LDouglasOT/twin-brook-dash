@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {FetchContext} from  "../../Context/FetchCOntroller"
 import axios from 'axios'
 
-function Pop() {
+function Pop({id}) {
     const {updatecode,popupname,schoolpaycode}=useContext(FetchContext)
     const [discount,setDiscount]=useState()
   return (
@@ -18,7 +18,7 @@ function Pop() {
       
 
     <div>
-        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Discount</label>
+        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Quantity</label>
         <input type="text" onChange={(e)=>setDiscount(e.target.value)} id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="eg. 15" required/>
     </div>
     <div>
@@ -26,7 +26,7 @@ function Pop() {
     <button onClick={async()=>{
       if(schoolpaycode && discount){
         let data={
-          "PayCode":schoolpaycode,
+          "id":id,
           "Discount":discount
         }
         let res= await axios.post("https://django-fever.herokuapp.com/student/discount/",data)

@@ -17,43 +17,38 @@ function Routing({modal}) {
   const [data,useData]=useState([
     {
       'route':"Dashboard",
-      'Lin':"/Dashboards",
+      'Lin':"/",
       icon:<RiDashboardFill className='w-5 h-5'/>
     },
     {
-      'route':"Students",
+      'route':"Drug",
       'Lin':"/Students",
       icon:<BsPersonFill className='w-5 h-5'/>
     },
     {
-      'route':"Uniforms",
-      'Lin':"/Uniforms",
-      'icon':<RiShirtFill className='w-5 h-5'/>
-    },
-    // {
-    //   'route':"Messages",
-    //   'Lin':"/Messages",
-    //   'icon':<MdOutlineTextsms className='w-5 h-5'/>
-    // },
-    {
-      'route':"Discounts",
-      'Lin':"/Discounts",
-      'icon':<BsPersonFill className='w-5 h-5'/>
-    },
-    {
-      'route':"Transactions",
+      'route':"Sales",
       'Lin':"/transactions",
       'icon':<BsPersonFill className='w-5 h-5'/>
     },
     {
-      'route':"Parents",
+      'route':"Expenses",
+      'Lin':"/expenses",
+      'icon':<BsPersonFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Patients",
       'Lin':"/Parents",
       'icon':<BsPersonFill className='w-5 h-5'/>
     },
     {
-      'route':"Accounts",
+      'route':"Schedules",
       'Lin':"/Accounts",
       'icon':<RiAccountPinBoxFill className='w-5 h-5'/>
+    },
+    {
+      'route':"Accounts",
+      'Lin':"/Discounts",
+      'icon':<BsPersonFill className='w-5 h-5'/>
     },
     {
       'route':"Logout",

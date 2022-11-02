@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer'
 import axios from 'axios'
 import {createContext, useState} from 'react'
 import { useToast } from 'react-toastify'
@@ -5,12 +6,10 @@ import {Poststudent} from './StudentOperations'
 
 
 export const FetchContext=createContext()
-
-
 const FetchContextProvider=(props)=>{
     const [transactions,seTransactions]=useState([])
     const [loading,setLoading]=useState(true)
-    const [studentdata,setData]=useState([])
+    const [drugdata,setData]=useState([])
     const [datalength,setDatalength]=useState(0)
     const [expected,setExpected]=useState(0)
     const [discountTotal,setDIscounttotal]=useState(0)
@@ -18,6 +17,9 @@ const FetchContextProvider=(props)=>{
     const[schoolpaycode,setSchoolpaycode]=useState()
     const[popupname,setPopupname]=useState()
     const [ipaycode,setupPaycode]=useState(false)
+    const [expenses,setExpenses]=useState([])
+    const [patient,setPatient]=useState([])
+
     const updatecode=(schoolpay,name)=>{
         console.log(schoolpay)
 
@@ -29,9 +31,7 @@ const FetchContextProvider=(props)=>{
        
     }
     const fetchdata=async()=>{
-      
-        let tokens="d73cef7b65902cb5110836f1320d6abad6275fca"
-        const data=await axios.get("https://django-fever.herokuapp.com/student/")
+        const data=await axios.get("http://127.0.0.1:8000/hospital/drugs/")
         if(data){
           console.log(data.data)
           setDatalength(data.data.length)
@@ -40,12 +40,8 @@ const FetchContextProvider=(props)=>{
           let discounted=0
           let total=0
           let expectedamount=0
-          studentdata.map((item)=>{
+          drugdata.map((item)=>{
             console.log(item)
-            total += item.fees.Paid
-            discounted += item.fees.Percentage
-            expectedamount +=item.fees.Expected
-         
           })
           setDIscounttotal(discounted)
           setfeesCollected(total)
@@ -54,19 +50,33 @@ const FetchContextProvider=(props)=>{
     }
 
     const fetchTransactions=async()=>{
-        let res =await axios.get("http://127.0.0.1:8000/student/transactions/")
+        console.log("///////////////////////////////////")
+        let res =await axios.get("http://127.0.0.1:8000/hospital/sales/")
         if(res){
+            console.log("///////////////////////////////////")
            console.log(res.data)
            seTransactions(res.data)
-           setLoading(false)
+           setLoading(!loading)
         }
     }
-    
-    const Poststudent=()=>{
 
-        
+    const fetchExpenses=async()=>{
+        let res =await axios.get("http://127.0.0.1:3001/expenses/")
+        if(res){
+            console.log(res.data.message)
+           setExpenses(res.data.message)
+
+           setLoading(!loading)
+        }
     }
 
+    const fetchPatient=async()=>{
+        const res=await axios.get("http://127.0.0.1:8000/hospital/patient/")
+        if(res){
+            console.log(res)
+            setPatient(res.data)
+        }
+    }
 const exports={ 
     transactions,
     fetchTransactions,
@@ -78,7 +88,13 @@ const exports={
     discountTotal,
     schoolpaycode,
     popupname,
-    ipaycode,fetchdata,studentdata
+    ipaycode,
+    fetchdata,
+    drugdata,
+    fetchExpenses,
+    expenses,
+    patient,
+    fetchPatient
 }
 return(
     <FetchContext.Provider value={{

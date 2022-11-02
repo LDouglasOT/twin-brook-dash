@@ -16,3 +16,8 @@ export {default as Transactions} from "./Transactions"
 export {default as Parents} from "./Parents"
 export {default as Accounts} from "./Accounts"
 export {default as Confirm} from './Modal/Confirms'
+export {default as Expenses} from './Expenses'
+export {default as Newxpense} from './Modal/Newxpense'
+export {default as AddPopup} from './Modal/AddPopup'
+export {default as Cart} from "./Modal/Cart"
+export {default as Edit} from "./Modal/Edit"
