@@ -18,7 +18,7 @@ const [time,setTime]=useState()
 const [day,setDay]=useState()
 
 const fetchschedules=async()=>{
-  const res= await axios.get("http://127.0.0.1:3001/Schedules/")
+  const res= await axios.get("https://twinbrook.onrender.com/Schedules/")
   
   if(res){
     console.log(res.data)
@@ -32,7 +32,7 @@ const deleteschedule=async(id)=>{
   }
   console.log(id)
  if(id){
-  let res= await axios.put(`http://127.0.0.1:3001/Schedules/`,data)
+  let res= await axios.put(`https://twinbrook.onrender.com/Schedules/`,data)
   console.log(res)
   if(res.status==200){
     toast.success('🦄 Schedule successfully deleted!', {
@@ -78,7 +78,7 @@ useEffect(()=>{
           "Time":time,
         }
        console.log(data)
-        const res=await axios.post("http://127.0.0.1:3001/Schedules/",data)
+        const res=await axios.post("https://twinbrook.onrender.com/Schedules/",data)
         if(res.status==201){
           console.log(res)
           toast.success('🦄 Schedule successfully saved!', {

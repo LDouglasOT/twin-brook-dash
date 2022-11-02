@@ -55,12 +55,12 @@ const bulkremove=()=>{
 const PostNewStudent=async(data)=>{
     console.log(data)
     console.log("2223s////////////////////////////////")
-    const posts = await axios.post('http://127.0.0.1:8000/hospital/drugs/', data)
+    const posts = await axios.post('http://localhost:3001/drugs', data)
     if (posts.status == 201) {
         console.log(posts)
         return true
     } else {
-        return false
+        console.log(posts)
     }
 }  
 

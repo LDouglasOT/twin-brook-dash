@@ -17,6 +17,7 @@ function Edit({ modulate }) {
   const [DrugSellingPrice, setDrugPrice] = useState()
   const [Drugqty, setDrugqty] = useState()
   const [DrugBuying, setDrugBuying] = useState()
+  const [Expiry,setExpiry] = useState()
 
   return (
     <>
@@ -35,16 +36,20 @@ function Edit({ modulate }) {
             <form onSubmit={
               async (e) => {
                e.preventDefault()
-               drug.BuyingPrice = DrugBuying
-               drug.SellingPrice=DrugSellingPrice
-               drug.quantity = parseInt(drug.quantity)+parseInt(Drugqty)
-               drug.expectedProfit=(DrugSellingPrice-DrugBuying)*Drugqty
-               if(drug){
-                console.log(drug.quantity)
-                const res=await axios.post("http://127.0.0.1:8000/hospital/drugspk/",drug)
+              
+              const data={
+                "id":drug._id,
+                "Quantity":parseInt(drug.Quantity)+parseInt(Drugqty),
+                "BuyingPrice":parseInt(DrugBuying),
+                "Sellingprice":parseInt(DrugSellingPrice),
+                "expiry":Expiry
+              }
+              console.log(data)
+
+                const res=await axios.put("http://localhost:3001/drugs/",data)
                 if(res.status==201){
                   console.log(res)
-                  toast.success('🦄 Patient successfully saved!', {
+                  toast.success('🦄 successfully Updated!', {
                     position: "top-right",
                     autoClose: true,
                     hideProgressBar: false,
@@ -55,7 +60,7 @@ function Edit({ modulate }) {
                     theme: "colored",
                     });
                   showpop("submitupdate")
-              }}}}>
+              }}}>
               <div class="grid gap-6 mb-6 mx-4 md:grid-cols-3">
                 <div>
                   <label for="last_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Quantity from {drug.quantity}</label>
@@ -68,11 +73,12 @@ function Edit({ modulate }) {
                     }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="500" required />
                 </div>
                 <div>
-                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Selling Price from {drug.SellingPrice}</label>
+                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Selling Price from {drug.Sellingprice}</label>
                   <input onChange={(e) => { 
                     setDrugPrice(e.target.value) 
                     }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="550" required />
                 </div>
+                <input type="date" onChange={(e)=>setExpiry(e.target.value)}></input>
               </div>
               <div className='flex items-center justify-between'>
               <div className='flex justify-end w-full ml-1'>

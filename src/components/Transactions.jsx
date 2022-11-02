@@ -67,7 +67,7 @@ const summation=(data)=>{
 const handleTransactions=async()=>{
 sale.Paid += parseInt(Paid)
 console.log(sale)
-const res=await axios.post("http://127.0.0.1:8000/hospital/salesupt/",sale)
+const res=await axios.post("https://twinbrook.onrender.com/hospital/salesupt/",sale)
 if(res.status==201){
   toast.success('🦄 Expense successfully saved!', {
     position: "top-right",
@@ -99,7 +99,11 @@ if(res.status==201){
           handleTransactions()}}>
         <div className='sales bg-slate-700'>
           <input onChange={(e)=>setPaid(e.target.value)} type="Number" className='p-1 rounded' placeholder='Amount Paid' />  
+          <div className='flex items-center'>
+          <button onClick={()=>setSHow(!show)} className='mt-3 mx-3 bg-red-500 p-1 rounded text-sm text-white'>close</button>
           <button className='mt-3 mx-3 bg-green-500 p-1 rounded text-sm text-white'>Update</button>
+          </div>
+          
         </div>
         </form>
         :""}
@@ -112,7 +116,7 @@ if(res.status==201){
       <thead className=''>
         <tr className="border w-10">
           <th className='flex-col items-center justify-center text-sm '>id</th>
-          <th className='flex-col items-center justify-center text-sm w-80'>List Name</th>
+          <th className='flex-col items-center justify-center text-sm w-80'>Drug List Names</th>
           <th className='flex-col items-center justify-center text-sm '>Date</th>
           <th className='flex-col items-center justify-center text-sm'>Total Price</th>
           <th className='flex-col items-center justify-center text-sm'>Paid</th>
@@ -122,13 +126,14 @@ if(res.status==201){
       <tbody>
       {transactions.map((item,key)=>(
         <tr className='border flex-row h-5' key={key}>
-          <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item.id}</div></td> 
-         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center'>{item.drugname}</div></td>
-          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center'>{item.dates}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.Totalprice}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.Paid}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center'>{item.Totalprice-item.Paid}</div></td>
-          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center'>
+          <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item._id
+}</div></td> 
+         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center text-sm flex-wrap'>{item.Other}</div></td>
+          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center text-sm'>{item.Date}</div></td>
+          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center text-sm'>{item.Paid+item.Balance}</div></td>
+          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center text-sm'>{item.Paid}</div></td>
+          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center text-sm'>{item.Balance}</div></td>
+          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center text-sm'>
           <button onClick={()=>{
             setSale(item)
             setSHow(!show)

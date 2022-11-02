@@ -27,7 +27,7 @@ function Newxpense(props) {
           "amount":Amount,
         }
         console.log(data)
-        let res= await axios.post("http://127.0.0.1:3001/expenses/",data)
+        let res= await axios.post("https://twinbrook.onrender.com/expenses/",data)
         if(res.status==201){
     
           console.log(res.status)

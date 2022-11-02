@@ -9,7 +9,7 @@ const [qty,setQty]=useState(0)
 const {druglst,drug,showing,setdrug,bulkremove,sendbackend,setdruglsts,remove}=useContext(PopupContext)
 const [iPrice,setPrice]=useState(0)
 const calc=(value)=>{
-  let val=parseInt(value)*parseInt(drug.SellingPrice)
+  let val=parseInt(value)*parseInt(drug.Sellingprice)
   setPrice(val) 
   setQty(value)
 }
@@ -25,7 +25,7 @@ return(
           <form onSubmit={(e)=>{
             e.preventDefault()
             if(qty){
-                drug.quantity=qty 
+                drug.Quantity=qty 
                 
                 setdruglsts(drug)
                 showing()

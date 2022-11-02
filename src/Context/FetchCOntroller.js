@@ -31,37 +31,26 @@ const FetchContextProvider=(props)=>{
        
     }
     const fetchdata=async()=>{
-        const data=await axios.get("http://127.0.0.1:8000/hospital/drugs/")
+        const data=await axios.get("https://twinbrook.onrender.com/drugs")
         if(data){
-          console.log(data.data)
-          setDatalength(data.data.length)
-          setData(data.data)
+          console.log(data.data.message)
+          setDatalength(data.data.message.length)
+          setData(data.data.message)
           setLoading(false)
-          let discounted=0
-          let total=0
-          let expectedamount=0
-          drugdata.map((item)=>{
-            console.log(item)
-          })
-          setDIscounttotal(discounted)
-          setfeesCollected(total)
-          setExpected(expectedamount)
         }
     }
 
     const fetchTransactions=async()=>{
-        console.log("///////////////////////////////////")
-        let res =await axios.get("http://127.0.0.1:8000/hospital/sales/")
+        let res =await axios.get("https://twinbrook.onrender.com/sales/")
         if(res){
-            console.log("///////////////////////////////////")
-           console.log(res.data)
-           seTransactions(res.data)
+           console.log(res.data.message)
+           seTransactions(res.data.message)
            setLoading(!loading)
         }
     }
 
     const fetchExpenses=async()=>{
-        let res =await axios.get("http://127.0.0.1:3001/expenses/")
+        let res =await axios.get("https://twinbrook.onrender.com/expenses/")
         if(res){
             console.log(res.data.message)
            setExpenses(res.data.message)
@@ -71,10 +60,10 @@ const FetchContextProvider=(props)=>{
     }
 
     const fetchPatient=async()=>{
-        const res=await axios.get("http://127.0.0.1:8000/hospital/patient/")
+        const res=await axios.get("https://twinbrook.onrender.com/patients/")
         if(res){
-            console.log(res)
-            setPatient(res.data)
+            console.log(res.data.message)
+            setPatient(res.data.message)
         }
     }
 const exports={ 

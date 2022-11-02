@@ -14,16 +14,13 @@ import {PopupContext} from "../../Context/Popupcontroller"
 function Popup({ modulate }) {
   const {PostNewStudent}=useContext(PopupContext)
   const { popup } = useContext(AuthContext)
-  const [startDate, setStartDate] = useState(new Date());
   const [Name, setName] = useState()
   const [BuyingPrice,setBuyingPrice] = useState()
   const [SellingPrice, setSellingPrice] = useState()
   const [quantity,setquantity] = useState()
   const [measurement, setmeasurement] = useState()
   const [medcap, setmedcap] = useState()
-  const [day, setday] = useState()
   const [month, setmonth] = useState()
-  const [year,setyear]=useState()
   const [damn,setdamn]=useState(true)
 
   return (
@@ -41,14 +38,11 @@ function Popup({ modulate }) {
               const data={
                 'Name':Name,
                 'BuyingPrice':BuyingPrice,
-                'SellingPrice':SellingPrice,
-                'quantity':quantity,
+                'Sellingprice':SellingPrice,
+                'Quantity':quantity,
                 'measurement':measurement,
                 'medcap':medcap,
-                'day':day,
-                'month':month,
-                'year':year,
-                'profit':(SellingPrice-BuyingPrice)*quantity
+                'expiry':month
               }
                const post= PostNewStudent(data)
                if(post){
@@ -97,6 +91,13 @@ function Popup({ modulate }) {
                     setmedcap(e.target.value) 
                     }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50" required />
                 </div>
+                <div>
+                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Cap</label>
+                  <input onChange={(e) => { 
+                    setmonth(e.target.value) 
+                    }} type="date" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50" required />
+                </div>
+                
                <div className='flex flex-col justify-center text-white text-lg items-center'>
                   Expected Profit
                   <h4 className='text-white'>{(SellingPrice-BuyingPrice)*quantity}</h4>
