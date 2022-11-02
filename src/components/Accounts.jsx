@@ -4,8 +4,7 @@ import {useState} from 'react'
 import "./index.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 function Accounts() {
 const [showpop,setshowpop]=useState(false)
@@ -127,7 +126,7 @@ useEffect(()=>{
           <th className='flex-col items-center justify-center text-sm'>month</th>
           <th className='flex-col items-center justify-center text-sm'>Contact</th>
           <th className='flex-col items-center justify-center text-sm'>starting time</th>
-          <th className='flex-col items-center justify-center text-sm'>Action</th>
+          <th className='flex-col items-center justify-center text-sm w-20'>Action</th>
         </tr> 
       </thead>
       <tbody>
