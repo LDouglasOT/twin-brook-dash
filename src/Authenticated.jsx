@@ -50,7 +50,7 @@ const [student,setStudent]=useState()
   return ( 
     <div className="flex bg-white-bg h-screen w-full">
   
-      <div className='w-2/12 bg-slate-700 hover:overflow-auto fixed h-screen'>
+      <div className='w-2/12 bg-slate-700 hover:overflow-auto flex flex-col items-center fixed h-screen'>
          <div className='h-40 bg-slate-700 flex-col justify-center items-center'>
          <div className="w-14 h-14 rounded-2xl mx-auto mt-16 ">
            <img className='rounded-full' src='https://avatars.githubusercontent.com/u/89447046?s=400&u=74cc4f37dbbd47fff924635b28beb9a37f920cb9&v=4' alt='colored'/>
