@@ -14,7 +14,7 @@ const AuthContextProvider=(props)=>{
    
     const [Newpop,setNew]=useState(false)
     const [update,setupdate]=useState(false)
-    const [authenticated,setAuthenticated]=useState(true)
+    const [authenticated,setAuthenticated]=useState(false)
 
     let [loading, setLoading] = useState(false);
 
