@@ -8,11 +8,13 @@ import axios from 'axios'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import {PopupContext} from "../../Context/Popupcontroller"
+import {FetchContext} from "../../Context/FetchCOntroller"
 // import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 function Popup({ modulate }) {
   const {PostNewStudent}=useContext(PopupContext)
+  const {fetchdata}=useContext(FetchContext)
   const { popup } = useContext(AuthContext)
   const [Name, setName] = useState()
   const [BuyingPrice,setBuyingPrice] = useState()
@@ -46,13 +48,15 @@ function Popup({ modulate }) {
               }
                const post= PostNewStudent(data)
                if(post){
+
                 setdamn(!damn)
                  popup("new", 1)
                  return
                }
+               fetchdata()
                setdamn(!damn)
               }
-
+              
             }>
               <div class="grid gap-6 mb-6 mx-4 md:grid-cols-3">
                 <div>

@@ -4,6 +4,8 @@ import {FetchContext} from  "../../Context/FetchCOntroller"
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Localbase from 'localbase'
+let db = new Localbase('db')
 
 function Newxpense(props) {
     const {updatecode,popupname,schoolpaycode}=useContext(FetchContext)
@@ -25,15 +27,11 @@ function Newxpense(props) {
         let data={
           "reason":Reason,
           "amount":Amount,
+          "data":new Date()
         }
-        console.log(data)
-        let res= await axios.post("https://twinbrook.onrender.com/expenses/",data)
-        if(res.status==201){
-    
-          console.log(res.status)
-          props.new("after")
-          console.log("none")
-        toast.success('Failed to save check your network and form!', {
+        db.collection('expenses').add({...data})
+
+        toast.success('successfully save expense', {
           position: "top-right",
           autoClose: true,
           hideProgressBar: false,
@@ -43,13 +41,30 @@ function Newxpense(props) {
           progress: undefined,
           theme: "colored",
           });
-          return
-        }
+        props.new("after")
+      //   console.log(data)
+      //   let res= await axios.post("https://twinbrook.onrender.com/expenses/",data)
+      //   if(res.status==201){
+    
+      //     console.log(res.status)
+      //     props.new("after")
+      //     console.log("none")
+      //   toast.success('Failed to save check your network and form!', {
+      //     position: "top-right",
+      //     autoClose: true,
+      //     hideProgressBar: false,
+      //     closeOnClick: true,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     progress: undefined,
+      //     theme: "colored",
+      //     });
+      //     return
+      //   }
         
-      }
+      // }
 
-    }
-   }>
+    }}}>
 
 
         <div className='w-full  text-slate-500 my-2 flex justify-center'><span>New Expense by Luzinda</span></div>

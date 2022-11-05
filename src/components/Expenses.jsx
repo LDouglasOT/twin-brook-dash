@@ -59,18 +59,8 @@ useEffect(()=>{
 },[0])
 const add=(data)=>{
   if(data=="after"){
+    fetchExpenses()
     setNew(!newx)
-    toast.success('🦄 Expense successfully saved!', {
-      position: "top-right",
-      autoClose: true,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      });
-      fetchExpenses()
   }else{
     setNew(!newx)
   }
@@ -78,12 +68,12 @@ const add=(data)=>{
 }
 
 const summation=(data)=>{
+  fetchExpenses()
   if( data==null)return 0
   let total = 0
   data.map((item)=>{
-    total +=item.Amount
+    total +=parseInt(item.amount)
   })
-
   return total
 }
 
@@ -127,9 +117,9 @@ const summation=(data)=>{
       <tbody>
       {expenses.map((item,key)=>(
         <tr className='border flex-row h-5' key={key}>
-          <td className='items-center justify-center text-sm w-90 border p-2'><div className='flex items-center justify-center  text-sm'>{item.Reason}</div></td> 
-         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center  text-sm'>{item.Amount}</div></td>
-          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center  text-sm'>{item.Date}</div></td>
+          <td className='items-center justify-center text-sm w-90 border p-2'><div className='flex items-center justify-center  text-sm'>{item.reason}</div></td> 
+         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center  text-sm'>{item.amount}</div></td>
+          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center  text-sm'>item.data</div></td>
         </tr>
       ))}
       </tbody>

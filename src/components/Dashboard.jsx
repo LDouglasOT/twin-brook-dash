@@ -33,7 +33,7 @@ function Dashboard() {
     if( data==null)return 0
     let total = 0
     data.map((item)=>{
-      total +=item.Amount
+      total +=parseInt(item.amount)
     })
     return total
   }
@@ -50,7 +50,7 @@ function Dashboard() {
 const calcdrug=()=>{
   let profit=0
   drugdata.map((item)=>{
-    profit += item.expectedProfit
+    profit += (parseInt(item.Sellingprice)-parseInt(item.BuyingPrice))
   })
   return profit
 }

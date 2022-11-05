@@ -3,6 +3,8 @@ import axios from 'axios'
 import {createContext, useState} from 'react'
 import { useToast } from 'react-toastify'
 import {Poststudent} from './StudentOperations'
+import Localbase from 'localbase'
+let db = new Localbase('db')
 
 
 export const FetchContext=createContext()
@@ -22,41 +24,52 @@ const FetchContextProvider=(props)=>{
 
     const updatecode=(schoolpay,name)=>{
         console.log(schoolpay)
-
         if(schoolpay){
             setSchoolpaycode(schoolpay)
             setPopupname(name)
             setupPaycode(!ipaycode)
         }
-       
     }
     const fetchdata=async()=>{
-        const data=await axios.get("https://twinbrook.onrender.com/drugs")
-        if(data){
-          console.log(data.data.message)
-          setDatalength(data.data.message.length)
-          setData(data.data.message)
-          setLoading(false)
-        }
+        // const data=await axios.get("https://twinbrook.onrender.com/drugs")
+        // if(data){
+        //   console.log(data.data.message)
+        //   setDatalength(data.data.message.length)
+        //   setData(data.data.message)
+        //   setLoading(false)
+        // }
+        db.collection('drugs').get().then(drugs => {
+            setData(drugs)
+          })
+
     }
 
     const fetchTransactions=async()=>{
-        let res =await axios.get("https://twinbrook.onrender.com/sales/")
-        if(res){
-           console.log(res.data.message)
-           seTransactions(res.data.message)
-           setLoading(!loading)
-        }
+        // let res =await axios.get("https://twinbrook.onrender.com/sales/")
+        // if(res){
+        //    console.log(res.data.message)
+        //    seTransactions(res.data.message)
+        //    setLoading(!loading)
+        // }
+        db.collection('Transactions').get().then(transactions => {
+            seTransactions(transactions)
+          })
+
     }
 
     const fetchExpenses=async()=>{
-        let res =await axios.get("https://twinbrook.onrender.com/expenses/")
-        if(res){
-            console.log(res.data.message)
-           setExpenses(res.data.message)
+        // let res =await axios.get("https://twinbrook.onrender.com/expenses/")
+        // if(res){
+        //     console.log(res.data.message)
+        //    setExpenses(res.data.message)
 
-           setLoading(!loading)
-        }
+        //    setLoading(!loading)
+        // }
+        console.log("fetching")
+        db.collection('expenses').get().then(expenses => {
+            setExpenses(expenses)
+        })
+
     }
 
     const fetchPatient=async()=>{

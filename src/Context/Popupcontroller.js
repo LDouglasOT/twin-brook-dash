@@ -2,6 +2,9 @@ import axios from 'axios'
 import {createContext, useState} from 'react'
 import { useToast } from 'react-toastify'
 import {Poststudent} from './StudentOperations'
+import Localbase from 'localbase'
+let db = new Localbase('db')
+
 
 
 export const PopupContext=createContext()
@@ -53,15 +56,17 @@ const bulkremove=()=>{
 }
 
 const PostNewStudent=async(data)=>{
-    console.log(data)
-    console.log("2223s////////////////////////////////")
-    const posts = await axios.post('http://localhost:3001/drugs', data)
-    if (posts.status == 201) {
-        console.log(posts)
-        return true
-    } else {
-        console.log(posts)
-    }
+    // console.log(data)
+    // console.log("2223s////////////////////////////////")
+    // const posts = await axios.post('http://localhost:3001/drugs', data)
+    // if (posts.status == 201) {
+    //     console.log(posts)
+    //     return true
+    // } else {
+    //     console.log(posts)
+    // }
+    db.collection('drugs').add({...data})
+    return true
 }  
 
  //This is where the update popu begins from 

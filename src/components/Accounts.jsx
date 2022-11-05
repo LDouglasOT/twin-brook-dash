@@ -4,6 +4,8 @@ import {useState} from 'react'
 import "./index.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Localbase from 'localbase'
+let db = new Localbase('db')
 
 
 function Accounts() {
@@ -18,12 +20,15 @@ const [time,setTime]=useState()
 const [day,setDay]=useState()
 
 const fetchschedules=async()=>{
-  const res= await axios.get("https://twinbrook.onrender.com/Schedules/")
+  db.collection('schedules').get().then(schedules => {
+    setDiscount(schedules)
+  })
+  // const res= await axios.get("https://twinbrook.onrender.com/Schedules/")
   
-  if(res){
-    console.log(res.data)
-    setDiscount(res.data)
-  }
+  // if(res){
+  //   console.log(res.data)
+  //   setDiscount(res.data)
+  // }
 }
 
 const deleteschedule=async(id)=>{
@@ -77,23 +82,39 @@ useEffect(()=>{
           "contact":contact,
           "Time":time,
         }
-       console.log(data)
-        const res=await axios.post("https://twinbrook.onrender.com/Schedules/",data)
-        if(res.status==201){
-          console.log(res)
-          toast.success('🦄 Schedule successfully saved!', {
-            position: "top-right",
-            autoClose: true,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
-          setshowpop(!showpop)
-          fetchschedules()
-        }
+
+        db.collection('schedules').add({...data})
+        toast.success('🦄 Schedule successfully saved!', {
+                position: "top-right",
+                autoClose: true,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+                setshowpop(!showpop)
+                fetchschedules()
+
+
+      //  console.log(data)
+      //   const res=await axios.post("https://twinbrook.onrender.com/Schedules/",data)
+      //   if(res.status==201){
+      //     console.log(res)
+      //     toast.success('🦄 Schedule successfully saved!', {
+      //       position: "top-right",
+      //       autoClose: true,
+      //       hideProgressBar: false,
+      //       closeOnClick: true,
+      //       pauseOnHover: true,
+      //       draggable: true,
+      //       progress: undefined,
+      //       theme: "colored",
+      //       });
+      //     setshowpop(!showpop)
+      //     fetchschedules()
+      //   }
         
       }}>
      <div id="popup" className='fixed bg-slate-800 items-center justify-center'>
