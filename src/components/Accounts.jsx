@@ -156,7 +156,7 @@ useEffect(()=>{
           <td className='items-center justify-center text-sm w-90 border p-2'><div className='flex items-center justify-center w-90'>{item.Reason}</div></td>
           <td className='items-center justify-center text-sm border'><div className='flex items-center justify-center w-60'>{item.Names}</div></td>
           <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center'>{item.Date}</div></td>
-          <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center'>{item.Contact}</div></td>
+          <td className='items-center justify-center text-sm w-40 border'><div className='flex items-center justify-center'>{item.contact}</div></td>
           <td className='items-center justify-center text-sm w-10 border'><div className='flex items-center justify-center'>{item.Time}</div></td> 
           <td className='items-center justify-center text-sm w-50 border'><div className='flex items-center justify-center'>
            {item.Status ? <h3 className='text-green-500 '>Completed</h3>: <button className='p-1 bg-red-500 text-white mx-1 rounded hover:bg-red-700' onClick={()=>deleteschedule(item._id)}>Complete</button>}

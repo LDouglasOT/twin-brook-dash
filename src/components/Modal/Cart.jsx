@@ -5,6 +5,8 @@ import axios from 'axios'
 import {PopupContext} from "../../Context/Popupcontroller"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Localbase from 'localbase'
+let db = new Localbase('db')
 
 function Cart() {
   const {druglst,showingcart}=useContext(PopupContext)
@@ -63,68 +65,71 @@ const makeOrder=async()=>{
   let quantity=0
   let drugnames=""
   druglst.map((item)=>{
-    drugnames +=`${item.Name}, `
-    total +=(item.Quantity*item.Sellingprice)
-  })
-
-console.log(quantity)
-if(paid < 0){
- setpaid(total)
-}
-  const data={
-    "Phone":Phone,
-    "Other":drugnames,
-    "Balance":total-paid,
-    "Paid":paid
-}
-
-
-console.log(data)
-const res=await axios.post("https://twinbrook.onrender.com/sales/",data)
-if(res.status==201){
-  console.log("res")
-  console.log(res.status)
-  console.log(res)
-  druglst.map((item)=>{
-    updatedrugs(item._id,item.Quantity)
+    let date=new Date()
+    db.collection('drugs').doc({ Name: item.Name }).get().then(document => {
+      let left=parseInt(document.Quantity)-parseInt(item.Quantity)
+      
+      db.collection('drugs').doc({ Name: item.Name }).update({
+        Quantity: left
+      })
+      db.collection('sales').add({
+       "drugName":item.Name,
+       "Total":parseInt(item.Sellingprice)*parseInt(item.Quantity),
+       "Profit":(parseInt(item.Sellingprice)*parseInt(item.Quantity))-(parseInt(item.BuyingPrice)*parseInt(item.Quantity)),
+        "date":date,
+        "supplier":item.supplier
+      })
+    })
+   console.log(item)
   })
   fetchdata()
-  toast.success('Successfully saved!', {
-    position: "top-right",
-    autoClose: true,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    });
   showingcart()
-}else if(res.status==404){
-  console.log("not found")
-  toast.warning('This patient doesnot exist in out database!', {
-    position: "top-right",
-    autoClose: true,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    });
-}else{
-  console.log("not found on the server")
-  toast.warning('Internet connection not available!', {
-    position: "top-right",
-    autoClose: true,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    });
-}
+// console.log(data)
+// const res=await axios.post("https://twinbrook.onrender.com/sales/",data)
+// if(res.status==201){
+//   console.log("res")
+//   console.log(res.status)
+//   console.log(res)
+//   druglst.map((item)=>{
+//     updatedrugs(item._id,item.Quantity)
+//   })
+//   fetchdata()
+//   toast.success('Successfully saved!', {
+//     position: "top-right",
+//     autoClose: true,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//     theme: "colored",
+//     });
+//   showingcart()
+// }else if(res.status==404){
+//   console.log("not found")
+//   toast.warning('This patient doesnot exist in out database!', {
+//     position: "top-right",
+//     autoClose: true,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//     theme: "colored",
+//     });
+// }else{
+//   console.log("not found on the server")
+//   toast.warning('Internet connection not available!', {
+//     position: "top-right",
+//     autoClose: true,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//     theme: "colored",
+//     });
+// }
 
 }
 
@@ -147,10 +152,10 @@ return(
               }
             </ul>
             <div className='flex justify-end w-full ml-1'>
-              <div className="flex flex-col w-full m-1 p-1">
+              {/* <div className="flex flex-col w-full m-1 p-1">
               <input onChange={(e)=>setpaid(e.target.value)} type="number" placeholder='Paid'  className='w-full mt-5 h-8'/>
               <input onChange={(e)=>setPhone(e.target.value)} type="number" placeholder='Phone Number'  className='w-full mt-5 h-8'/>
-              </div>
+              </div> */}
               <button className='mx-10 text-white '>Cost: {sum(druglst)}</button>
               <button onClick={()=>showingcart()} className='bg-red-600  text-white rounded-sm m-4 text-sm py-1 px-3 active:bg-red-800 h-10'>Close</button>
               <button type='submit' onClick={()=>makeOrder()} name="Register" className='bg-green-600 text-white rounded-sm m-4 text-sm py-1 h-10 px-3 active:bg-green-800'>Order</button>

@@ -40,7 +40,7 @@ function Dashboard() {
   const calctransactions=()=>{
     let fee=0
     transactions.map((item)=>{
-      fee += item.Amount 
+      fee += item.Total 
     })
     return fee
   }
@@ -50,7 +50,7 @@ function Dashboard() {
 const calcdrug=()=>{
   let profit=0
   drugdata.map((item)=>{
-    profit += (parseInt(item.Sellingprice)-parseInt(item.BuyingPrice))
+    profit += parseInt(item.Sellingprice)*parseInt(item.Quantity)
   })
   return profit
 }
@@ -58,7 +58,7 @@ const calcdrug=()=>{
 const calcdrugprofit=()=>{
   let profit=0
   drugdata.map((item)=>{
-    profit += item.Profit
+    profit += ((parseInt(item.Sellingprice)-parseInt(item.BuyingPrice)))*parseInt(item.Quantity)
   })
   return profit
 }
@@ -67,7 +67,7 @@ const calcdrugprofit=()=>{
   const data=expected-feesCollected
  const [Fees,setFees]=useState([
     { title: 'Paid', value: calctransactions(), color: '#E38627' },
-    { title: 'Balance', value: data, color: '#C13C37' },
+    { title: 'Balance', value: calcdrug(), color: '#C13C37' },
     { title: 'Three', value: 20, color: '#6A2135' },
   ])
 
@@ -85,10 +85,10 @@ const calcdrugprofit=()=>{
             <div className='w-full flex-col h-full flex justify-center'>
             <div className='flex justify-center items-center m-0'>
                 <div>
-                  <span className='bg-purple-600 px-2 mx-1'></span>Collected
+                  <span className='bg-red-600 px-2 mx-1'></span>Collected
                 </div>
                 <div>
-                  <span className='bg-blue-800 px-2 mx-1'></span>Expected
+                  <span className='bg-orange-500 px-2 mx-1'></span>Expected
                 </div>
             </div>
             <PieChart data={Fees} radius="38" label={()=>Fees.title}/>
@@ -101,7 +101,7 @@ const calcdrugprofit=()=>{
               </div>
               <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
                 <h2 className='text-white text-sm'>Profits</h2>
-                <h3 className='text-slate-200 text-2xl'>USh {calcdrugprofit}</h3>
+                <h3 className='text-slate-200 text-2xl'>USh {calcdrugprofit()}</h3>
               </div>
               <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
                 <h2 className='text-slate-200 text-sm'>Patients</h2>
@@ -113,15 +113,7 @@ const calcdrugprofit=()=>{
               </div>
               <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
                 <h2 className='text-slate-200 text-sm'>Losses(expired)</h2>
-                <h3 className='text-slate-200 text-2xl'>USh 100</h3>
-              </div>
-              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Most sold</h2>
-                <h3 className='text-slate-200 text-2xl'>USh 2400</h3>
-              </div>
-              <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
-                <h2 className='text-slate-200 text-sm'>Loaned Cash</h2>
-                <h3 className='text-slate-200 text-2xl'>USh 2400</h3>
+                <h3 className='text-slate-200 text-2xl'>USh 0</h3>
               </div>
               <div className='flex p-4 bg-slate-800 w-5/12 h-32 rounded m-1 items-center justify-center flex-col items-center justify-center'>
                 <h2 className='text-slate-200 text-sm'>Expenses</h2>

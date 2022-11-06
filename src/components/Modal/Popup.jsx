@@ -24,6 +24,8 @@ function Popup({ modulate }) {
   const [medcap, setmedcap] = useState()
   const [month, setmonth] = useState()
   const [damn,setdamn]=useState(true)
+  const [supplier,setsupplier]=useState()
+  const [batch,setbatch]=useState()
 
   return (
     <>
@@ -44,7 +46,9 @@ function Popup({ modulate }) {
                 'Quantity':quantity,
                 'measurement':measurement,
                 'medcap':medcap,
-                'expiry':month
+                'expiry':month,
+                "btc":batch,
+                "supplier":supplier
               }
                const post= PostNewStudent(data)
                if(post){
@@ -86,7 +90,7 @@ function Popup({ modulate }) {
                   <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Measurement/qty</label>
                   <input onChange={(e) => { 
                     setmeasurement(e.target.value) 
-                    }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50" required />
+                    }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="tbl" required />
                 </div>
 
                 <div>
@@ -96,10 +100,26 @@ function Popup({ modulate }) {
                     }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50" required />
                 </div>
                 <div>
-                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Cap</label>
+                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Expiry</label>
                   <input onChange={(e) => { 
                     setmonth(e.target.value) 
                     }} type="date" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50" required />
+                </div>
+                <div>
+                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">supplier</label>
+                    <select name="batch" className='p-3 w-40' onChange={(e)=>setsupplier(e.target.value)} id="batch" >
+                      <option value="town">supplier Name</option>
+                      <option value="Christa">Christa</option>
+                      <option value="Biogen">Biogen</option>
+                      <option value="Aiveen">Aiveen</option>
+                      <option value="Asthra Pharmacy">Asthra Pharmacy</option>
+                    </select>
+                 </div>
+                <div>
+                  <label for="first_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Btc No.</label>
+                  <input onChange={(e) => { 
+                    setbatch(e.target.value) 
+                    }} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50" required />
                 </div>
                 
                <div className='flex flex-col justify-center text-white text-lg items-center'>

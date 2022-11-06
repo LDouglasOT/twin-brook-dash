@@ -51,7 +51,7 @@ const FetchContextProvider=(props)=>{
         //    seTransactions(res.data.message)
         //    setLoading(!loading)
         // }
-        db.collection('Transactions').get().then(transactions => {
+        db.collection('sales').get().then(transactions => {
             seTransactions(transactions)
           })
 
@@ -73,11 +73,16 @@ const FetchContextProvider=(props)=>{
     }
 
     const fetchPatient=async()=>{
-        const res=await axios.get("https://twinbrook.onrender.com/patients/")
-        if(res){
-            console.log(res.data.message)
-            setPatient(res.data.message)
-        }
+        // const res=await axios.get("https://twinbrook.onrender.com/patients/")
+        // if(res){
+        //     console.log(res.data.message)
+        //     setPatient(res.data.message)
+        // }
+
+        db.collection('Patients').get().then(expenses => {
+            console.log(expenses)
+            setPatient(expenses)
+        })
     }
 const exports={ 
     transactions,

@@ -44,17 +44,17 @@ function Routing({modal}) {
       'route':"Schedules",
       'Lin':"/Accounts",
       'icon':<RiAccountPinBoxFill className='w-5 h-5'/>
-    },
-    {
-      'route':"Accounts",
-      'Lin':"/Discounts",
-      'icon':<BsPersonFill className='w-5 h-5'/>
-    },
-    {
-      'route':"Logout",
-      'Lin':"/Logout",
-      'icon':<GrLogout className='w-5 h-5'/>
-    },
+    }
+    // {
+    //   'route':"Accounts",
+    //   'Lin':"/Discounts",
+    //   'icon':<BsPersonFill className='w-5 h-5'/>
+    // },
+    // {
+    //   'route':"Logout",
+    //   'Lin':"/Logout",
+    //   'icon':<GrLogout className='w-5 h-5'/>
+    // },
  
   ])
   return (

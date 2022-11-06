@@ -9,6 +9,9 @@ import { useState } from 'react';
 import {PopupContext} from "../../Context/Popupcontroller"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Localbase from 'localbase'
+let db = new Localbase('db')
+
 
 
 function Edit({ modulate }) {
@@ -44,23 +47,44 @@ function Edit({ modulate }) {
                 "Sellingprice":parseInt(DrugSellingPrice),
                 "expiry":Expiry
               }
-              console.log(data)
+              
+              db.collection('drugs').doc({ Name: drug.Name }).update({
+                Quantity:parseInt(drug.Quantity)+parseInt(Drugqty),
+                BuyingPrice:parseInt(DrugBuying),
+                Sellingprice:parseInt(DrugSellingPrice),
+                expiry:Expiry
+              })
+        
 
-                const res=await axios.put("http://localhost:3001/drugs/",data)
-                if(res.status==201){
-                  console.log(res)
-                  toast.success('🦄 successfully Updated!', {
-                    position: "top-right",
-                    autoClose: true,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    });
-                  showpop("submitupdate")
-              }}}>
+              console.log(data)
+              toast.success('🦄 successfully Updated!', {
+                position: "top-right",
+                autoClose: true,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+              showpop("submitupdate")
+
+              //   const res=await axios.put("http://localhost:3001/drugs/",data)
+              //   if(res.status==201){
+              //     console.log(res)
+              //     toast.success('🦄 successfully Updated!', {
+              //       position: "top-right",
+              //       autoClose: true,
+              //       hideProgressBar: false,
+              //       closeOnClick: true,
+              //       pauseOnHover: true,
+              //       draggable: true,
+              //       progress: undefined,
+              //       theme: "colored",
+              //       });
+              //     showpop("submitupdate")
+              // }
+            }}>
               <div class="grid gap-6 mb-6 mx-4 md:grid-cols-3">
                 <div>
                   <label for="last_name" class="block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300">Quantity from {drug.quantity}</label>

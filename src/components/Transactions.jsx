@@ -60,10 +60,20 @@ const summation=(data)=>{
   if( data==null)return 0
   let total = 0
   data.map((item)=>{
-    total +=item.sale
+    total +=item.Profit
   })
   return total
 }
+
+const Profit=(data)=>{
+  if( data==null)return 0
+  let total = 0
+  data.map((item)=>{
+    total +=item.Total
+  })
+  return total
+}
+
 const handleTransactions=async()=>{
 sale.Paid += parseInt(Paid)
 console.log(sale)
@@ -90,7 +100,8 @@ if(res.status==201){
     <div className='w-full h-screen drop-shadow-xl border bg-white overflow-hidden rounded-lg'>
       <div className='flex justify-between w-full m-2'>
         <div className='flex items-center flex-center justify-center'>
-        <h3 className='text-slate-500  mx-4 my-1'>Total Drugs: {summation(transactions)}</h3>
+        <h3 className='text-slate-500  mx-4 my-1'>Total Profit: {summation(transactions)}</h3>
+        <h3 className='text-slate-500  mx-4 my-1'>Total Sales: {Profit(transactions)}</h3>
         <h3>Month: October</h3>
         </div>
         {show ? 
@@ -115,30 +126,20 @@ if(res.status==201){
     
       <thead className=''>
         <tr className="border w-10">
-          <th className='flex-col items-center justify-center text-sm '>id</th>
-          <th className='flex-col items-center justify-center text-sm w-80'>Drug List Names</th>
-          <th className='flex-col items-center justify-center text-sm '>Date</th>
-          <th className='flex-col items-center justify-center text-sm'>Total Price</th>
-          <th className='flex-col items-center justify-center text-sm'>Paid</th>
-          <th className='flex-col items-center justify-center text-sm'>Balance</th>
+          <th className='flex-col items-center justify-center text-sm '>Drug Name</th>
+          <th className='flex-col items-center justify-center text-sm w-80'>Profit</th>
+          <th className='flex-col items-center justify-center text-sm '>Paid</th>
+          <th className='flex-col items-center justify-center text-sm '>Supplier</th>
+       
         </tr> 
       </thead>
       <tbody>
       {transactions.map((item,key)=>(
         <tr className='border flex-row h-5' key={key}>
-          <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item._id
-}</div></td> 
-         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center text-sm flex-wrap'>{item.Other}</div></td>
-          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center text-sm'>{item.Date}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center text-sm'>{item.Paid+item.Balance}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center text-sm'>{item.Paid}</div></td>
-          <td className='items-center justify-center text-sm w-60 border'><div className='flex items-center justify-center text-sm'>{item.Balance}</div></td>
-          <td className='items-center justify-center text-sm w-80 border'><div className='flex items-center justify-center text-sm'>
-          <button onClick={()=>{
-            setSale(item)
-            setSHow(!show)
-          }} className='bg-green-500 p-1 rounded text-white'>Update</button>
-          </div></td>
+          <td className='items-center justify-center text-sm w-80 border p-2'><div className='flex items-center justify-center'>{item.drugName}</div></td> 
+         <td className='items-center justify-center text-sm border w-80 '><div className='flex items-center justify-center text-sm flex-wrap'>{item.Profit}</div></td>
+          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center text-sm'>{item.Total}</div></td>
+          <td className='items-center justify-center text-sm border w-80'><div className='flex items-center justify-center text-sm'>{item.supplier}</div></td>
         </tr>
       ))}
       </tbody>
